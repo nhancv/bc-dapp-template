@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Col, Container, Row } from 'reactstrap'
+import {Col, Container, Row} from 'reactstrap'
 import './style.css'
 
 const clipHowToBuy = require('./crypto_lottery_clip_how_to_buy.mp4')
@@ -43,7 +43,8 @@ class Main extends React.Component<MainProps, MainState> {
               <li>Crypto Lottery contract was verified and published on the main net. Everyone can check and test it
                 absolutely.
               </li>
-              <li>Crypto Lottery contract was designed with a simple approach and structure to obey the rules, it can not
+              <li>Crypto Lottery contract was designed with a simple approach and structure to obey the rules, it can
+                not
                 be destroyed or change or upgrade the initial rules.
               </li>
               <li>Crypto Lottery game properties are dynamic and auto scale by session game time and no one can touch

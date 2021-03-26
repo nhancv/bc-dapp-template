@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import { Callback, EventLog } from 'web3/types';
+import {Callback, EventLog} from 'web3/types';
 
 const cryptoLottSol = require('./abi/CryptoLott.json')
 

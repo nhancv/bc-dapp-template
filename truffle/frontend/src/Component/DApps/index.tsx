@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Col, Container, Row } from 'reactstrap'
+import {Col, Container, Row} from 'reactstrap'
 import './style.css'
 
 type MainProps = {}

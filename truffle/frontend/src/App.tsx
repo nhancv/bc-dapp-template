@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { Footer, Header, HomeView, Rules, TermsOfService, DApps } from './Component'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {DApps, Footer, Header, HomeView, Rules, TermsOfService} from './Component'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css'
 
 type AppProps = {}
