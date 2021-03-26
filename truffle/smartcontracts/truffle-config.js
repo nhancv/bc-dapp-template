@@ -24,7 +24,23 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+require('dotenv').config()
+const HDWalletProvider = require('truffle-hdwallet-provider')
+const MNEMONIC = process.env.MNEMONIC
+const ROPSTEN_URL = process.env.ROPSTEN_URL
+const KOVAN_URL = process.env.KOVAN_URL
+const RINKEBY_URL = process.env.RINKEBY_URL
+const MAINNET_URL = process.env.MAINNET_URL
+
 module.exports = {
+
+  // Uncommenting the defaults below
+  // provides for an easier quick-start with Ganache.
+  // You can also follow this format for other networks;
+  // see <http://truffleframework.com/docs/advanced/configuration>
+  // for more details on how to specify configuration options!
+  contracts_build_directory: "../frontend/src/Contract/abi",
+
   /**
    * Networks define how you connect to your ethereum client and let you set the
    * defaults web3 uses to send transactions. If you don't specify one truffle
@@ -72,6 +88,34 @@ module.exports = {
     // network_id: 2111,   // This network is yours, in the cloud.
     // production: true    // Treats this network as if it was a public net. (default: false)
     // }
+    development: {
+        host: "127.0.0.1",
+        port: 7545,
+        network_id: "*"
+    },
+    test: {
+        host: "127.0.0.1",
+        port: 7545,
+        network_id: "*"
+    },
+    ropsten: {
+        provider: () => new HDWalletProvider(MNEMONIC, ROPSTEN_URL),
+        network_id: 3
+    },
+    kovan: {
+        provider: () => new HDWalletProvider(MNEMONIC, KOVAN_URL),
+        network_id: 42
+    },
+    rinkeby: {
+        provider: () => new HDWalletProvider(MNEMONIC, RINKEBY_URL),
+        network_id: 4
+    },
+    // main ethereum network(mainnet)
+    mainnet: {
+        provider: () => new HDWalletProvider(MNEMONIC, MAINNET_URL),
+        network_id: 1
+    }
+
   },
 
   // Set default mocha options here, use special reporters etc.

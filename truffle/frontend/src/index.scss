@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Play&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Play', sans-serif;
+  color: white;
+  background: black;
+
+  overflow: scroll;
+  -ms-overflow-style: none; // IE 10+
+  scrollbar-width: none; // Firefox
+
+  a {
+    color: #206A25;
+  }
+
+  a:hover {
+    color: #49994b;
+  }
+
+  input {
+    border-radius: 0 !important
+  }
+}
+
+body::-webkit-scrollbar {
+  display: none; // Safari and Chrome
+}
