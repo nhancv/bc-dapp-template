@@ -13,6 +13,9 @@ https://nhancv.medium.com/smartcontract-ico-crowdsale-simple-35dc5ff02459
 Example
 https://github.com/nhancv/nc-blockchain-netday
 
+ERC20 & TRC20 Token template
+https://gist.github.com/nhancv/58997e9a6e7f896627339d122e5671bf
+
 # Install 
 
 TRUFFLE CLI
