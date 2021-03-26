@@ -1,28 +1,44 @@
 {
   "compilerOptions": {
-    "types": [
-      "jest", "node"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "baseUrl": ".",
-    "outDir": "build/dist",
     "module": "esnext",
-    "target": "es6",
-    "lib": ["es6", "es2016", "dom"],
+    "target": "es5",
+    "lib": [
+      "es6",
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "sourceMap": true,
-    "allowJs": true,
     "jsx": "react",
-    "moduleResolution": "node",
-    "rootDir": "src",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
+    "importHelpers": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": false
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "exclude": ["node_modules", "!node_modules/@types","build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts"
+  ]
 }

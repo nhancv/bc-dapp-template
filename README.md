@@ -150,7 +150,7 @@ Update new contract address to `truffle/frontend/src/Contract/CryptoLottContract
 
 ## Build Frontend
 cd truffle/frontend
-npm i
+npm install --legacy-peer-deps
 npm start
 
 Go to: http://localhost:3000/

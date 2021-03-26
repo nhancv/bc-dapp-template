@@ -8,7 +8,7 @@
 ## Build Frontend
 ```
 cd frontend
-npm i
+npm install --legacy-peer-deps
 npm start
 
 Go to: http://localhost:3000/
