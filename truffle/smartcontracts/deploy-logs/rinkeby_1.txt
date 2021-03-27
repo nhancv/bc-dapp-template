@@ -1,0 +1,105 @@
+smartcontracts|master⚡ ⇒ truffle migrate -f 2 --network rinkeby
+
+Compiling your contracts...
+===========================
+✔ Fetching solc version list from solc-bin. Attempt #1
+> Everything is up to date, there is nothing to compile.
+
+
+
+Migrations dry-run (simulation)
+===============================
+> Network name:    'rinkeby-fork'
+> Network id:      4
+> Block gas limit: 10000000 (0x989680)
+
+
+2_deploy_contracts.js
+=====================
+
+   Replacing 'CryptoLott'
+   ----------------------
+   > block number:        8306833
+   > block timestamp:     1616836032
+   > account:             0xFd0c67EDD5e4cE03cd8397Dc748b19b0A5c0f645
+   > balance:             13.738596187
+   > gas used:            2251007 (0x2258ff)
+   > gas price:           2 gwei
+   > value sent:          0 ETH
+   > total cost:          0.004502014 ETH
+
+
+   Deploying 'UniqueAsset'
+   -----------------------
+   > block number:        8306834
+   > block timestamp:     1616836088
+   > account:             0xFd0c67EDD5e4cE03cd8397Dc748b19b0A5c0f645
+   > balance:             13.733600001
+   > gas used:            2498093 (0x261e2d)
+   > gas price:           2 gwei
+   > value sent:          0 ETH
+   > total cost:          0.004996186 ETH
+
+   -------------------------------------
+   > Total cost:           0.0094982 ETH
+
+
+Summary
+=======
+> Total deployments:   2
+> Final cost:          0.0094982 ETH
+
+
+
+
+
+Starting migrations...
+======================
+> Network name:    'rinkeby'
+> Network id:      4
+> Block gas limit: 10000000 (0x989680)
+
+
+2_deploy_contracts.js
+=====================
+
+   Replacing 'CryptoLott'
+   ----------------------
+   > transaction hash:    0x8ac71111c4360782e2f567b87abb64b6c86065ffccf8270313fa831017d04592
+   > Blocks: 2            Seconds: 21
+   > contract address:    0x84DAE7dEF477aC78fe0A021f76A17402F2b6B9d3
+   > block number:        8306846
+   > block timestamp:     1616836129
+   > account:             0xFd0c67EDD5e4cE03cd8397Dc748b19b0A5c0f645
+   > balance:             13.695414061
+   > gas used:            2384207 (0x24614f)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.04768414 ETH
+
+
+   Deploying 'UniqueAsset'
+   -----------------------
+   > transaction hash:    0x601faa28cbe211bf522333b988dd2d149e3c7a756b28ca22d11933dc8d8bf27a
+   > Blocks: 2            Seconds: 21
+   > contract address:    0xBbbFbC5514c3F9C85fDa0F3052530e32895f8EC4
+   > block number:        8306848
+   > block timestamp:     1616836159
+   > account:             0xFd0c67EDD5e4cE03cd8397Dc748b19b0A5c0f645
+   > balance:             13.644800201
+   > gas used:            2530693 (0x269d85)
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.05061386 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:            0.098298 ETH
+
+
+Summary
+=======
+> Total deployments:   2
+> Final cost:          0.098298 ETH

@@ -28440,10 +28440,105 @@
       "transactionHash": "0x193fde4742a17b66c67e74ba1ac18520d21fb18c804d1ff9568509d123564de1"
     },
     "4": {
-      "events": {},
+      "events": {
+        "0xfdf2bc4b463433ab95187f69622b0d3e4305cbcf27c35e8dfb9175adaef97a6d": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_minPrice",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint64",
+              "name": "_playerInSession",
+              "type": "uint64"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "_charityRate",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "_winnerRate",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint64",
+              "name": "_luckyNumberRange",
+              "type": "uint64"
+            }
+          ],
+          "name": "GameSessionBeginEvent",
+          "type": "event"
+        },
+        "0xa06a0572fcae48117f79772b56e393d8a07cb47bffa09a171c665a2145537524": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address[]",
+              "name": "_winnerAddressList",
+              "type": "address[]"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint64",
+              "name": "_luckyNumber",
+              "type": "uint64"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_totalReward",
+              "type": "uint256"
+            }
+          ],
+          "name": "GameSessionEndEvent",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "_from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "_to",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0x14ef9390b146c40dce0e3b8c9e5c9286fe8a07b054f852e06fe9e2efc28f7e3d": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "_playerAddress",
+              "type": "address"
+            }
+          ],
+          "name": "PlayerRegisterEvent",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0xb898CEaE9B41fF87b2bC22a41E63755604fE4771",
-      "transactionHash": "0x30996824035ed7f623620df6015640e29633b7064d6f4856d00797982f3b1b97"
+      "address": "0x84DAE7dEF477aC78fe0A021f76A17402F2b6B9d3",
+      "transactionHash": "0x8ac71111c4360782e2f567b87abb64b6c86065ffccf8270313fa831017d04592"
     },
     "42": {
       "events": {},
@@ -28549,12 +28644,12 @@
         }
       },
       "links": {},
-      "address": "0x716103d7CfC4D353Ba1a9a1D6D06bE1C0F803275",
-      "transactionHash": "0x6501e8edec15ba4d15dc3ad78e8a5458e6d1f07cb4923747ff273e2b5597d0bf"
+      "address": "0xa638F571f061BAa52775276524C7c7Ac0B51CD67",
+      "transactionHash": "0xf3c7cc90fc6ae05562a1ea03cbf5cbb284e2a6d224b5d4b965930a5d6951227f"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-03-26T16:54:22.333Z",
+  "updatedAt": "2021-03-27T09:09:36.549Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
