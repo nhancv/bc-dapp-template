@@ -13,7 +13,7 @@ Name            : NToken2
 Total supply    : 1000000000
 Decimals        : 8
 
- */
+*/
 
 // ---------------------------------------------------------------------
 // ERC-20 Token Standard Interface
@@ -106,12 +106,20 @@ abstract contract TokenRecipient {
 }
 
 /**
-Token implement
+ERC20Token implement
  */
-contract Token is ERC20Interface, Owned {
+contract ERC20Token is ERC20Interface, Owned {
 
-    mapping (address => uint256) public balances;
-    mapping (address => mapping (address => uint256)) public allowed;
+    constructor(string memory _name, string memory _symbol, uint8 _decimals, uint256 _initialSupply) Owned() {
+        name = _name;
+        symbol = _symbol;
+        decimals = _decimals;
+        totalSupply = _initialSupply * 10 ** uint256(decimals);
+        balances[msg.sender] = totalSupply;
+    }
+
+    mapping(address => uint256) public balances;
+    mapping(address => mapping(address => uint256)) public allowed;
 
     // This notifies clients about the amount burnt
     event Burn(address indexed from, uint256 value);
@@ -208,21 +216,53 @@ contract Token is ERC20Interface, Owned {
 
 }
 
-contract NToken2 is Token {
+abstract contract MintableToken is ERC20Token {
 
-    function NC() public {
-        name = "NToken2";
-        symbol = "NToken2";
-        decimals = 8;
-        totalSupply = 1000000000;
-        balances[msg.sender] = totalSupply;
+    // Owner can mint more coin.
+    function mint(uint256 _amount) external payable onlyOwner {
+        require(_amount > 0);
+        uint256 _decimalAmount = _amount * 10 ** uint256(decimals);
+        totalSupply += _decimalAmount;
+        balances[owner] += _decimalAmount;
     }
 
+}
+
+abstract contract ExchangeableToken is ERC20Token {
     /**
-    If ether is sent to this address, send it back.
-     */
-    receive () external payable {
-        revert();
+       Handle if ether is sent to this address
+    */
+    receive() external payable {
+        // Incase: None Exchangeable
+        // If ether is sent to this address, send it back.
+        //revert();
+
+        // Incase: Exchangeable
+        // Send 1 Eth to get 100 ExchangeableToken
+        uint256 _amountEth = msg.value;
+        // decimals
+        require(_amountEth >= 1, "You must pay at least 1 ETH to get 100 Token");
+        address _sender = msg.sender;
+        require(_sender != owner);
+        uint256 _tokens = 100 * 10 ** uint256(decimals);
+        uint256 _ownerBalance = balances[owner];
+        require(_tokens <= _ownerBalance, 'Owner - inefficient balances');
+        balances[_sender] += _tokens;
+        balances[owner] -= _tokens;
+
+        address payable payableOwner = payable(owner);
+        // Transfer ether to Owner
+        (bool success,) = payableOwner.call{value : _amountEth}("");
+        require(success, "Transfer failed.");
+        emit Transfer(owner, _sender, _tokens);
+
     }
+
+}
+
+
+contract nhancv is ExchangeableToken, MintableToken {
+
+    constructor() ERC20Token("nhancv", "nhancv", 6, 1000000000) {}
 
 }

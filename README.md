@@ -19,9 +19,6 @@ https://gist.github.com/nhancv/58997e9a6e7f896627339d122e5671bf
 Remix online IDE
 https://remix.ethereum.org/#optimize=true&runs=200&evmVersion=null&version=soljson-v0.8.3+commit.8d00100c.js
 
-ERC20Token v0.8.3
-https://gist.github.com/nhancv/0b8d79afe5d737157d27eded6e60a75a
-
 # Install 
 
 TRUFFLE CLI
