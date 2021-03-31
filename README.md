@@ -22,6 +22,9 @@ https://remix.ethereum.org/#optimize=true&runs=200&evmVersion=null&version=soljs
 # Install 
 
 TRUFFLE CLI
+
+https://www.trufflesuite.com/docs/truffle/quickstart
+
 ```
 npm install truffle -g
 ```
@@ -39,7 +42,7 @@ mkdir smartcontracts && cd smartcontracts
 npm init -y
 npm install truffle-hdwallet-provider --save
 npm install bip39 dotenv --save
-npm install @openzeppelin/contracts --save
+npm install @openzeppelin/contracts @openzeppelin/contracts-upgradeable @openzeppelin/truffle-upgrades --save
 truffle init
 ```
 
@@ -265,4 +268,12 @@ Explorer: https://cchain.explorer.avax.network/
 ```
 
 - Access: https://remix.ethereum.org and do the same with Ropsten ETH Token
+
+## Upgrade contracts 
+
+> change the contract code, while preserving the state, balance, and address
+
+- https://docs.openzeppelin.com/learn/upgrading-smart-contracts
+- https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable
+- https://docs.openzeppelin.com/upgrades-plugins/1.x/truffle-upgrades
 

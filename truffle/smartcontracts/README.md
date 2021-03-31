@@ -12,7 +12,7 @@ KOVAN_URL=https://kovan.infura.io/v3/<your-api-key>
 RINKEBY_URL=https://rinkeby.infura.io/v3/<your-api-key>
 MAINNET_URL=https://mainnet.infura.io/v3/<your-api-key>
 ```
-- Goto Truffle project, install node libs
+- Go to Truffle project, install node libs
 ```
 npm install truffle-hdwallet-provider --save
 npm install bip39 dotenv --save
