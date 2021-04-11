@@ -13,7 +13,7 @@ contract UniqueAsset is ERC721URIStorage {
 
     constructor() ERC721("UniqueAsset", "UNA") {}
 
-    function awardItem(address recipient, string memory hash, string memory metadata)
+    function awardItem(address recipient, string memory hash, string memory tokenURI)
     public
     returns (uint256)
     {
@@ -22,10 +22,10 @@ contract UniqueAsset is ERC721URIStorage {
 
         _tokenIds.increment();
 
-        uint256 newItemId = _tokenIds.current();
-        _mint(recipient, newItemId);
-        _setTokenURI(newItemId, metadata);
+        uint256 tokenId = _tokenIds.current();
+        _mint(recipient, tokenId);
+        _setTokenURI(tokenId, tokenURI);
 
-        return newItemId;
+        return tokenId;
     }
 }
