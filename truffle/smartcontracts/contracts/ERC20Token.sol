@@ -5,10 +5,10 @@ pragma solidity 0.8.3;
 /**
 Nhancv token contract
 
-Symbol          : NToken2
-Name            : NToken2
+Name            : Nhan Cao
+Symbol          : nhancv
 Total supply    : 1000000000
-Decimals        : 8
+Decimals        : 6
 
 */
 
@@ -260,6 +260,6 @@ abstract contract ExchangeableToken is ERC20Token {
 
 contract nhancv is ExchangeableToken, MintableToken {
 
-    constructor() ERC20Token("nhancv", "nhancv", 6, 1000000000) {}
+    constructor() ERC20Token("Nhan Cao", "nhancv", 6, 1000000000) {}
 
 }
