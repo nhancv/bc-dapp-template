@@ -8,9 +8,9 @@ type MainProps = {}
 type MainState = {}
 
 class Main extends React.Component<MainProps, MainState> {
-  constructor(props: MainProps) {
-    super(props)
-  }
+  // constructor(props: MainProps) {
+  //   super(props)
+  // }
 
   render() {
     return (

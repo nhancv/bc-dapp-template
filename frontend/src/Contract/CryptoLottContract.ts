@@ -1,7 +1,6 @@
 import Web3 from 'web3'
-import {Callback, EventLog} from 'web3/types';
 
-const cryptoLottSol = require('./abi/CryptoLott.json')
+const cryptoLottSol = require('./abis/CryptoLott.json')
 
 export type Player = {
   playerAddress: string;
@@ -13,7 +12,7 @@ export default class CryptoLottContract {
   web3: Web3
   account: string
   contract: any
-  contractAddress: string
+  contractAddress: string | undefined
 
   constructor(web3: any, account: any) {
     this.web3 = web3
@@ -25,14 +24,14 @@ export default class CryptoLottContract {
     return this.web3.eth.getBalance(account ? account : this.account)
   }
 
-  initContract(contractAddress: string = '0x716103d7CfC4D353Ba1a9a1D6D06bE1C0F803275') {
+  initContract(contractAddress: string = '0xb898CEaE9B41fF87b2bC22a41E63755604fE4771') {
     this.contractAddress = contractAddress
     this.contract = new this.web3.eth.Contract(cryptoLottSol.abi, this.contractAddress)
   }
 
-  trackingEvent(cb?: Callback<EventLog>): any {
-    this.contract.events.allEvents({}, (error, event) => {
-      // console.log(event.event, event);
+  trackingEvent(cb?: any): any {
+    this.contract.events.allEvents({}, (error: any, event: any) => {
+      console.log(event.event, event);
       if (cb) {
         cb(error, event);
       }
@@ -83,7 +82,7 @@ export default class CryptoLottContract {
   ownerUpCharityAddress(charityAddress: string, transactionHash?: Function): Promise<any> {
     return this.contract.methods.upCharityAddress(charityAddress)
       .send({from: this.account})
-      .on('transactionHash', hash => {
+      .on('transactionHash', (hash: any) => {
         if (transactionHash) transactionHash(hash)
       });
   }
@@ -91,7 +90,7 @@ export default class CryptoLottContract {
   ownerEnableContract(status: boolean, transactionHash?: Function): Promise<any> {
     return this.contract.methods.enableContract(status)
       .send({from: this.account})
-      .on('transactionHash', hash => {
+      .on('transactionHash', (hash: any) => {
         if (transactionHash) transactionHash(hash)
       });
   }
@@ -101,7 +100,7 @@ export default class CryptoLottContract {
     return this.contract.methods.config(minPrice, maxPlayerRandom, maxLuckyNumberRandom,
       charityRate, winnerRate)
       .send({from: this.account})
-      .on('transactionHash', hash => {
+      .on('transactionHash', (hash: any) => {
         if (transactionHash) transactionHash(hash)
       });
   }
@@ -110,17 +109,17 @@ export default class CryptoLottContract {
     return this.contract.methods
       .playerRegister(name, numbers)
       .send({from: this.account, value: value})
-      .on('transactionHash', hash => {
+      .on('transactionHash', (hash: any) => {
         if (transactionHash) transactionHash(hash)
       })
-      .on('confirmation', (confirmationNumber, receipt) => {
-        // console.log('=> confirmation: ' + confirmationNumber)
+      .on('confirmation', (confirmationNumber: string, receipt: any) => {
+        console.log('=> confirmation: ' + confirmationNumber)
       })
-      .on('receipt', receipt => {
-        // console.log('=> reciept', receipt)
+      .on('receipt', (receipt: any) => {
+        console.log('=> reciept', receipt)
       })
-      .on('error', error => {
-        // console.error('Error: ', error)
+      .on('error', (error: any) => {
+        console.error('Error: ', error)
       })
   }
 }

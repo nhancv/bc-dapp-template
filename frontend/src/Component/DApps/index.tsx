@@ -22,22 +22,22 @@ class Main extends React.Component<MainProps, MainState> {
           <Col>
             <h2>DApps</h2>
             <h6>
-              <a href="https://dapp.review/dapp/11730" target="_blank" className="alert-link">
+              <a href="https://dapp.review/dapp/11730" target="_blank" rel="noreferrer" className="alert-link">
                 https://dapp.review/dapp/11730
               </a>
             </h6>
             <h6>
-              <a href="https://www.stateofthedapps.com/dapps/crypto-lottery" target="_blank" className="alert-link">
+              <a href="https://www.stateofthedapps.com/dapps/crypto-lottery" target="_blank" rel="noreferrer" className="alert-link">
                 https://www.stateofthedapps.com/dapps/crypto-lottery
               </a>
             </h6>
             <h6>
-              <a href="https://www.dapp.com/dapp/crypto-lottery" target="_blank" className="alert-link">
+              <a href="https://www.dapp.com/dapp/crypto-lottery" target="_blank" rel="noreferrer" className="alert-link">
                 https://www.dapp.com/dapp/crypto-lottery
               </a>
             </h6>
             <h6>
-              <a href="https://dappradar.com/app/1577/crypto-lottery" target="_blank" className="alert-link">
+              <a href="https://dappradar.com/app/1577/crypto-lottery" target="_blank" rel="noreferrer" className="alert-link">
                 https://dappradar.com/app/1577/crypto-lottery
               </a>
             </h6>

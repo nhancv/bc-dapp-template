@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { Alert, Button, Col, Container, Input, Row } from 'reactstrap'
-import CryptoLottContract, { Player } from '../../Contract/CryptoLottContract';
+import {Alert, Button, Col, Container, Input, Row} from 'reactstrap'
+import CryptoLottContract, {Player} from '../../Contract/CryptoLottContract';
 import Web3 from 'web3';
 import Circle from 'react-circle';
 import './style.css'
-import { Rules } from '../index';
+import {Rules} from '../index';
 
 type MainProps = {}
 type MainState = {
@@ -32,10 +32,10 @@ type MainState = {
 class Main extends React.Component<MainProps, MainState> {
   // Set default props
   static defaultProps = {};
-  web3: Web3;
-  account: string;
-  contract: CryptoLottContract;
-  textInput: Input;
+  web3: Web3 | undefined;
+  account: string | undefined;
+  contract: CryptoLottContract | undefined;
+  textInput: Input | undefined;
 
   constructor(props: MainProps) {
     super(props);
@@ -113,8 +113,8 @@ class Main extends React.Component<MainProps, MainState> {
 
     if (this.web3) {
       try {
-        this.web3.eth.getAccounts((error, accounts) => {
-          if (!error && accounts.length !== 0) {
+        await this.web3.eth.getAccounts((error, accounts) => {
+          if (!error && accounts.length !== 0 && this.web3) {
             this.account = accounts[0]
             this.web3.eth.defaultAccount = this.account
             doneCb()
@@ -129,23 +129,25 @@ class Main extends React.Component<MainProps, MainState> {
   }
 
   getContractAddress = () => {
-    this.setState({
-      contractAddress: this.contract.contractAddress
-    })
+    if (this.contract?.contractAddress) {
+      this.setState({
+        contractAddress: this.contract.contractAddress
+      })
+    }
   }
 
   getCurrentBalance = () => {
     if (!this.constractReady()) return
-    this.contract.viewBalance().then(balance => {
+    this.contract?.viewBalance().then(balance => {
       this.setState({
-        currentBalance: balance
+        currentBalance: Number(balance)
       })
     })
   }
 
   getMinPrice = () => {
     if (!this.constractReady()) return
-    return this.contract.getMinPrice().then(num => {
+    return this.contract?.getMinPrice().then(num => {
       this.setState({
         minPrice: num
       })
@@ -154,7 +156,7 @@ class Main extends React.Component<MainProps, MainState> {
 
   getCountPlayer = () => {
     if (!this.constractReady()) return
-    return this.contract.getCountPlayer().then(num => {
+    return this.contract?.getCountPlayer().then(num => {
       this.setState({
         countPlayer: num
       })
@@ -163,7 +165,7 @@ class Main extends React.Component<MainProps, MainState> {
 
   getMaxPlayer = () => {
     if (!this.constractReady()) return
-    return this.contract.getMaxPlayer().then(num => {
+    return this.contract?.getMaxPlayer().then(num => {
       this.setState({
         maxPlayer: num
       })
@@ -172,7 +174,7 @@ class Main extends React.Component<MainProps, MainState> {
 
   getMaxLuckyRandomNumber = () => {
     if (!this.constractReady()) return
-    return this.contract.getMaxLuckyRandomNumber().then(num => {
+    return this.contract?.getMaxLuckyRandomNumber().then(num => {
       this.setState({
         maxLuckyRandomNumber: num
       })
@@ -181,7 +183,7 @@ class Main extends React.Component<MainProps, MainState> {
 
   getLastTotalFund = () => {
     if (!this.constractReady()) return
-    return this.contract.getLastTotalFund().then(num => {
+    return this.contract?.getLastTotalFund().then(num => {
       this.setState({
         lastTotalFund: num
       })
@@ -190,7 +192,7 @@ class Main extends React.Component<MainProps, MainState> {
 
   getLastLuckyNumber = () => {
     if (!this.constractReady()) return
-    return this.contract.getLastLuckyNumber().then(num => {
+    return this.contract?.getLastLuckyNumber().then(num => {
       this.setState({
         lastLuckyNumber: num
       })
@@ -199,7 +201,7 @@ class Main extends React.Component<MainProps, MainState> {
 
   getCurrentFund = () => {
     if (!this.constractReady()) return
-    return this.contract.getCurrentFund().then(num => {
+    return this.contract?.getCurrentFund().then(num => {
       this.setState({
         currentFund: num
       })
@@ -208,14 +210,14 @@ class Main extends React.Component<MainProps, MainState> {
 
   getCharityAddress = () => {
     if (!this.constractReady()) return
-    return this.contract.getCharityAddress().then(data => {
+    return this.contract?.getCharityAddress().then(data => {
       this.setState({
         charityAddress: data
       })
 
-      this.contract.viewBalance(data).then(balance => {
+      this.contract?.viewBalance(data).then(balance => {
         this.setState({
-          charityBalance: balance
+          charityBalance: Number(balance)
         })
       });
     });
@@ -223,7 +225,7 @@ class Main extends React.Component<MainProps, MainState> {
 
   getOwnerAddress = () => {
     if (!this.constractReady()) return
-    return this.contract.getOwnerAddress().then(data => {
+    return this.contract?.getOwnerAddress().then(data => {
       this.setState({
         ownerAddress: data
       })
@@ -232,7 +234,7 @@ class Main extends React.Component<MainProps, MainState> {
 
   getPlayerInfo = (playerAddress: string) => {
     if (!this.constractReady()) return
-    return this.contract.getPlayerInfo(playerAddress).then(data => {
+    return this.contract?.getPlayerInfo(playerAddress).then(data => {
       this.setState({
         playerInfo: {
           playerName: data.playerName,
@@ -248,7 +250,7 @@ class Main extends React.Component<MainProps, MainState> {
       if (!numbers) {
         return [];
       }
-      let intNumbers: number[] = numbers.split(/[\ \,\-]+/g)
+      let intNumbers: number[] = numbers.split(/[ ,-]+/g)
         .map(s => parseInt(s, 10))
         .filter(n => !isNaN(n) && n <= this.state.maxLuckyRandomNumber);
 
@@ -277,15 +279,15 @@ class Main extends React.Component<MainProps, MainState> {
 
     let value = numbers.length * this.state.minPrice;
     this.contract
-      .playerRegister(name, numbers, value, transactionHash => {
+      ?.playerRegister(name, numbers, value, (transactionHash: any) => {
         this.setState({
-          msgLog: `Request Transaction Hash: 
-        <a href="https://etherscan.io/tx/${transactionHash}" target="_blank" className="alert-link">
+          msgLog: `Request Transaction Hash:
+        <a href="https://etherscan.io/tx/${transactionHash}" target="_blank" rel="noreferrer" className="alert-link">
         ${transactionHash}</a>`
         })
       })
       .then(
-        hashObject => {
+        (hashObject: { transactionHash: any; blockNumber: any; cumulativeGasUsed: any; gasUsed: any; from: any; to: any; }) => {
           this.setState({
             msgLog: `
         Transaction Hash: ${hashObject.transactionHash}<br/>
@@ -298,7 +300,7 @@ class Main extends React.Component<MainProps, MainState> {
           })
           this.refreshAllData();
         },
-        error => {
+        (error: any) => {
           this.setState({
             msgLog: 'Error'
           })
@@ -308,9 +310,9 @@ class Main extends React.Component<MainProps, MainState> {
 
   ownerUpCharityAddress = (charityAddress: string) => {
     if (!this.constractReady()) return
-    return this.contract.ownerUpCharityAddress(charityAddress, transactionHash => {
+    return this.contract?.ownerUpCharityAddress(charityAddress, (transactionHash: any) => {
         this.setState({
-          msgLog: `Request Transaction Hash: 
+          msgLog: `Request Transaction Hash:
         <a href="https://etherscan.io/tx/${transactionHash}" target="_blank" className="alert-link">
         ${transactionHash}</a>`
         })
@@ -338,9 +340,9 @@ class Main extends React.Component<MainProps, MainState> {
   ownerEnableContract = (ownerInput: string) => {
     if (!this.constractReady()) return;
     let status = ownerInput !== 'false';
-    return this.contract.ownerEnableContract(status, transactionHash => {
+    return this.contract?.ownerEnableContract(status, (transactionHash: any) => {
         this.setState({
-          msgLog: `Request Transaction Hash: 
+          msgLog: `Request Transaction Hash:
         <a href="https://etherscan.io/tx/${transactionHash}" target="_blank" className="alert-link">
         ${transactionHash}</a>`
         })
@@ -370,20 +372,20 @@ class Main extends React.Component<MainProps, MainState> {
       charityRate: number, winnerRate: number;
 
     if (!this.constractReady()) return;
-    let arrs: number[] = ownerInput.split(/[\ \,\-]+/g)
+    let arrs: number[] = ownerInput.split(/[ ,-]+/g)
       .map(s => Number(s))
       .filter(n => !isNaN(n));
     if (arrs.length !== 5) return;
-    minPrice = arrs [0];
-    maxPlayerRandom = arrs [1];
-    maxLuckyNumberRandom = arrs [2];
-    charityRate = arrs [3];
-    winnerRate = arrs [4];
-    return this.contract.ownerConfig(minPrice, maxPlayerRandom, maxLuckyNumberRandom,
-      charityRate, winnerRate, transactionHash => {
+    minPrice = arrs[0];
+    maxPlayerRandom = arrs[1];
+    maxLuckyNumberRandom = arrs[2];
+    charityRate = arrs[3];
+    winnerRate = arrs[4];
+    return this.contract?.ownerConfig(minPrice, maxPlayerRandom, maxLuckyNumberRandom,
+      charityRate, winnerRate, (transactionHash: any) => {
         this.setState({
-          msgLog: `Request Transaction Hash: 
-        <a href="https://etherscan.io/tx/${transactionHash}" target="_blank" className="alert-link">
+          msgLog: `Request Transaction Hash:
+        <a href="https://etherscan.io/tx/${transactionHash}" target="_blank" rel="noreferrer" className="alert-link">
         ${transactionHash}</a>`
         })
       }
@@ -420,7 +422,7 @@ class Main extends React.Component<MainProps, MainState> {
       this.getLastTotalFund(),
       this.getLastLuckyNumber(),
       this.getCurrentFund(),
-      this.getPlayerInfo(this.account)
+      this.getPlayerInfo(this.account ?? '')
     ]).then(() => {
       if (this.state.initializing) {
         this.setState({initializing: false})
@@ -429,25 +431,22 @@ class Main extends React.Component<MainProps, MainState> {
   }
 
   constractReady = (): boolean => {
-    if (this.state && this.state.providerValid && this.contract) {
-      return true
-    }
-    return false
+    return !!(this.state && this.state.providerValid && this.contract);
   }
 
-  updateInputPlayerName = evt => {
+  updateInputPlayerName = (evt: { target: { value: any; }; }) => {
     this.setState({
       inputPlayerName: evt.target.value
     })
   }
 
-  updateInputPlayerNumbers = evt => {
+  updateInputPlayerNumbers = (evt: { target: { value: any; }; }) => {
     this.setState({
       inputPlayerNumbers: evt.target.value
     })
   }
 
-  updateInputOwner = evt => {
+  updateInputOwner = (evt: { target: { value: any; }; }) => {
     this.setState({
       inputOwner: evt.target.value
     })
@@ -458,7 +457,7 @@ class Main extends React.Component<MainProps, MainState> {
   }
 
   normalizeEthBalance = (input: number): string => {
-    if (this.web3.utils && input >= 0) {
+    if (this.web3?.utils && input >= 0) {
       return this.web3.utils.fromWei(input.toString(), 'ether') + ' ETH';
     }
     return 'n/a'
@@ -535,6 +534,7 @@ class Main extends React.Component<MainProps, MainState> {
                 <h6>You have {this.normalizeEthBalance(this.state.currentBalance)}</h6>
                 <h6>Your address is &nbsp;
                   <a target="_blank"
+                     rel="noreferrer"
                      href={`https://etherscan.io/address/${this.state.playerInfo.playerAddress}`}>
                     {this.state.playerInfo.playerAddress}
                   </a>
@@ -584,6 +584,7 @@ class Main extends React.Component<MainProps, MainState> {
 
                   <h6>Registered address: &nbsp;
                     <a target="_blank"
+                       rel="noreferrer"
                        href={`https://etherscan.io/address/${this.state.playerInfo.playerAddress}`}>
                       {this.state.playerInfo.playerAddress}
                     </a>
@@ -608,14 +609,18 @@ class Main extends React.Component<MainProps, MainState> {
               <h4>More information</h4>
               <h6>
                 Contract address is &nbsp;
-                <a target="_blank" href={`https://etherscan.io/address/${this.state.contractAddress}`}>
+                <a target="_blank"
+                   rel="noreferrer"
+                   href={`https://etherscan.io/address/${this.state.contractAddress}`}>
                   {this.state.contractAddress}
                 </a>
               </h6>
               {/*Charity address*/}
               <h6>
                 Charity address is &nbsp;
-                <a target="_blank" href={`https://etherscan.io/address/${this.state.charityAddress}`}>
+                <a target="_blank"
+                   rel="noreferrer"
+                   href={`https://etherscan.io/address/${this.state.charityAddress}`}>
                   {this.state.charityAddress}
                 </a>
               </h6>
@@ -686,7 +691,9 @@ class Main extends React.Component<MainProps, MainState> {
             <Col>
               {this.state.initializing ? null :
                 <h6>Non-Ethereum browser detected. You should consider trying&nbsp;
-                  <a href="https://metamask.io/" target="_blank">MetaMask!</a>
+                  <a href="https://metamask.io/"
+                     target="_blank"
+                     rel="noreferrer">MetaMask!</a>
                 </h6>
               }
             </Col>

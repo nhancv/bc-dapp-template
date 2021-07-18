@@ -1,21 +1,31 @@
-## Config local network
-- Install Ganache
-- Start Ganache and create new project by point to truffle-config.js file
+## [For local deployment] Development env
+- Option1: Install Ganache -> Start Ganache and create new project by point to `truffle-config.js` file
+- Option2: Install Ganache Cli: https://github.com/trufflesuite/ganache-cli
 
-## Config Real network
+## For auto publish and verify contract
+
+Docs:
+- https://forum.openzeppelin.com/t/verify-smart-contract-inheriting-from-openzeppelin-contracts/4119
+- https://github.com/rkalis/truffle-plugin-verify#readme
+- https://docs.binance.org/smart-chain/developer/deploy/truffle-verify.html
+
+## [For Ethereum] Get Web3 Api key from Infura.io Real network
 - Register new account on infura.io
 - Create new project
-- Get project api and connection link: 
+- Get project api and connection link:
 ```
 ROPSTEN_URL=https://ropsten.infura.io/v3/<your-api-key>
 KOVAN_URL=https://kovan.infura.io/v3/<your-api-key>
 RINKEBY_URL=https://rinkeby.infura.io/v3/<your-api-key>
 MAINNET_URL=https://mainnet.infura.io/v3/<your-api-key>
 ```
+
+## Preparing deployment configuration
 - Go to Truffle project, install node libs
 ```
 npm install truffle-hdwallet-provider --save
 npm install bip39 dotenv --save
+npm install truffle-plugin-verify
 
 # where
 * bip39 – used to generate wallet mnemonic
@@ -32,6 +42,8 @@ ROPSTEN_URL=https://ropsten.infura.io/v3/<your-api-key>
 KOVAN_URL=https://kovan.infura.io/v3/<your-api-key>
 RINKEBY_URL=https://rinkeby.infura.io/v3/<your-api-key>
 MAINNET_URL=https://mainnet.infura.io/v3/<your-api-key>
+ETHERSCANAPI_KEY=<from https://etherscan.io>
+BSCSCANAPI_KEY=<from https://bscscan.com>
 ```
 - Update truffle-config.js file
 ```
@@ -42,47 +54,81 @@ const ROPSTEN_URL = process.env.ROPSTEN_URL
 const KOVAN_URL = process.env.KOVAN_URL
 const RINKEBY_URL = process.env.RINKEBY_URL
 const MAINNET_URL = process.env.MAINNET_URL
+const ETHERSCANAPI_KEY = process.env.ETHERSCANAPI_KEY
+const BSCSCANAPI_KEY = process.env.BSCSCANAPI_KEY
 
 module.exports = {
-    // Uncommenting the defaults below
-    // provides for an easier quick-start with Ganache.
-    // You can also follow this format for other networks;
-    // see <http://truffleframework.com/docs/advanced/configuration>
-    // for more details on how to specify configuration options!
-    contracts_build_directory: "../frontend/src/Contract/abi",
-    networks: {
-        development: {
-            host: "127.0.0.1",
-            port: 7545,
-            network_id: "*"
-        },
-        test: {
-            host: "127.0.0.1",
-            port: 7545,
-            network_id: "*"
-        },
-        ropsten: {
-            provider: () => new HDWalletProvider(MNEMONIC, ROPSTEN_URL),
-            network_id: 3
-        },
-        kovan: {
-            provider: () => new HDWalletProvider(MNEMONIC, KOVAN_URL),
-            network_id: 42
-        },
-        rinkeby: {
-            provider: () => new HDWalletProvider(MNEMONIC, RINKEBY_URL),
-            network_id: 4
-        },
-        // main ethereum network(mainnet)
-        mainnet: {
-            provider: () => new HDWalletProvider(MNEMONIC, MAINNET_URL),
-            network_id: 1
-        }
-    }
 
+  contracts_directory: "./contracts/active",
+  contracts_build_directory: "./contracts/abis",
+
+  networks: {
+
+    development: {
+      host: "127.0.0.1",
+      port: 7545,
+      network_id: "*",
+      websockets: true
+    },
+    test: {
+      host: "127.0.0.1",
+      port: 7545,
+      network_id: "*",
+      websockets: true
+    },
+    ropsten: {
+      provider: () => new HDWalletProvider(MNEMONIC, ROPSTEN_URL),
+      network_id: 3
+    },
+    kovan: {
+      provider: () => new HDWalletProvider(MNEMONIC, KOVAN_URL),
+      network_id: 42
+    },
+    rinkeby: {
+      provider: () => new HDWalletProvider(MNEMONIC, RINKEBY_URL),
+      network_id: 4
+    },
+    // main ethereum network(mainnet)
+    mainnet: {
+      provider: () => new HDWalletProvider(MNEMONIC, MAINNET_URL),
+      network_id: 1
+    },
+    // bsc test net
+    bscTestnet:{
+      provider: () => new HDWalletProvider(MNEMONIC, "https://data-seed-prebsc-1-s1.binance.org:8545"),
+      network_id: 97,
+    },
+    // bsc main net
+    bscMainnet: {
+      provider: () => new HDWalletProvider(MNEMONIC, "https://bsc-dataseed.binance.org"),
+      network_id: 56
+    },
+  },
+
+  // Auto publish and verify contract
+  plugins: [
+    'truffle-plugin-verify'
+  ],
+  api_keys: {
+    etherscan: ETHERSCANAPI_KEY,
+    bscscan: BSCSCANAPI_KEY
+  },
+
+  // Configure your compilers
+  compilers: {
+    solc: {
+      version: ">=0.6.0 <=0.8.4", 
+    }
+  },
+
+  // Truffle DB is currently disabled by default;
+  db: {
+    enabled: false
+  }
 };
 
 ```
+
 - To get public wallet address
 ```
 truffle console --network <network>
@@ -92,12 +138,14 @@ truffle console --network ropsten
 truffle(ropsten)> web3.eth.getAccounts((err, accounts) => console.log(accounts))
 [ '0x627306090abab3a6e1400e9345bc60c78a8bef57' ]
 ``` 
-- Prepare some eth from test network faucet
+
+- Prepare some eth/bsc from test network faucet
 ```
 https://faucet.metamask.io/
 https://faucet.ropsten.be/
 https://faucet.metamask.io/
 http://faucet.bitfwd.xyz/
+https://testnet.binance.org/faucet-smart
 ```
 
 ## Deploy a contract to the network
@@ -116,6 +164,70 @@ truffle migrate --network mainnet
 
 # Compile & Migrate contract only (Replace if exist and Deploy for new one)
 truffle migrate -f 2 --network ropsten
+
+# Compile & Deploy new contract (not replace) 
+truffle migrate -f 1 --network bscTestnet
+```
+
+## Publish & Verify Contract
+
+```
+truffle run verify {contract_class_name}@{contract_address} --network <network_name>
+
+* Note: if your just deploy one one {contract_class_name}, you can remove @{contract_address} when verify
+truffle run verify {contract_class_name} --network <network_name>
+
+Ex:
+truffle run verify LaunchX@0x4031B139faFfD14119F142A75c2d04aDB15C5c81 --network bscTestnet
+
+=> You should see the following output:
+Verifying LaunchX@0x4031B139faFfD14119F142A75c2d04aDB15C5c81
+Pass - Verified: https://testnet.bscscan.com/address/0x4031B139faFfD14119F142A75c2d04aDB15C5c81#contracts
+Successfully verified 1 contract(s).
+```
+
+## Flat Contract to one contract .sol file
+
+Truffle Flattener concats solidity files from Truffle with all of their dependencies.
+https://www.npmjs.com/package/truffle-flattener
+
+> Another option is https://www.npmjs.com/package/sol-merger
+> 
+> npm install sol-merger -g
+
+```
+# Install
+npm install truffle-flattener -g
+
+# Usage: Just intall it with npm in your truffle project and run 
+truffle-flattener <solidity-files>.
+
+# Limitations: Aliased imports (eg: import {symbol1 as alias, symbol2} from "filename";) are not supported by truffle-flattener.
+```
+
+## Max contract size
+
+https://soliditydeveloper.com/max-contract-size
+
+```
+npm install truffle-contract-size
+Add the plugin to the truffle-config.js: plugins: ["truffle-contract-size"]
+Run truffle run contract-size
+```
+
+## Example development script
+```
+Terminal 1: ganache-cli -p 7545
+Terminal 2: 
+# local
+truffle migrate -f 1
+# bsc testnet
+truffle migrate -f 2 --to 2 --network bscTestnet
+truffle run verify ERC20Token --network bscTestnet
+
+# To mainnet
+truffle migrate -f 2 --to 2 --network bscMainnet
+truffle run verify ERC20Token --network bscMainnet
 ```
 
 ## Deploy ERC721 contract on public testnet Rinkeby
@@ -313,7 +425,7 @@ truffle(rinkeby)> await nft.ownerOf(3)
 ```
 
 * After mint the first item, we can check on Opensea
-  
+
 ```
 - Fill Contract address here: https://testnets.opensea.io/get-listed/step-two
 - Submit and check

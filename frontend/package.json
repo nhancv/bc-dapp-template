@@ -1,5 +1,5 @@
 {
-  "name": "ethereum-smartcontracts",
+  "name": "bc-smartcontracts-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
