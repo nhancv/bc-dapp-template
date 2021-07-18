@@ -1,8 +1,7 @@
 import * as React from 'react'
 import {Link} from 'react-router-dom';
 import './style.css'
-
-const logo = require('./logo.png')
+import logo from './logo.png';
 
 type MainProps = {}
 type MainState = {}
@@ -17,7 +16,7 @@ class Main extends React.Component<MainProps, MainState> {
       <div>
         <header className="App-header">
           <Link to={'/'} className="nav-link">
-            <img src={logo} className="App-logo" alt="Crypto Lottery logo"/>
+            <img src={logo} className="App-logo" alt="logo"/>
           </Link>
           <h1 className="App-title">Crypto Lottery</h1>
         </header>
