@@ -14,19 +14,21 @@ export default class CryptoLottContract {
   contract: any
   contractAddress: string | undefined
 
-  constructor(web3: any, account: any) {
+  constructor(web3: any, account: any, contractAddress: string) {
     this.web3 = web3
     this.account = account
-    this.initContract()
+    this.initContract(contractAddress)
   }
 
   viewBalance(account?: string) {
     return this.web3.eth.getBalance(account ? account : this.account)
   }
 
-  initContract(contractAddress: string = '0xb898CEaE9B41fF87b2bC22a41E63755604fE4771') {
-    this.contractAddress = contractAddress
-    this.contract = new this.web3.eth.Contract(cryptoLottSol.abi, this.contractAddress)
+  initContract(contractAddress: string) {
+    if(contractAddress) {
+      this.contractAddress = contractAddress
+      this.contract = new this.web3.eth.Contract(cryptoLottSol.abi, this.contractAddress)
+    }
   }
 
   trackingEvent(cb?: any): any {
