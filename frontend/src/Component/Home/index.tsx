@@ -351,7 +351,7 @@ class Main extends React.Component<MainProps, MainState> {
       ?.playerRegister(name, numbers, value, (transactionHash: any) => {
         this.setState({
           msgLog: `Request Transaction Hash:
-        <a href="https://etherscan.io/tx/${transactionHash}" target="_blank" rel="noreferrer" className="alert-link">
+        <a href="${this.networkInfo()?.scanUrl}/tx/${transactionHash}" target="_blank" rel="noreferrer" className="alert-link">
         ${transactionHash}</a>`
         })
       })
@@ -382,7 +382,7 @@ class Main extends React.Component<MainProps, MainState> {
     return this.contract?.ownerUpCharityAddress(charityAddress, (transactionHash: any) => {
         this.setState({
           msgLog: `Request Transaction Hash:
-        <a href="https://etherscan.io/tx/${transactionHash}" target="_blank" className="alert-link">
+        <a href="${this.networkInfo()?.scanUrl}/tx/${transactionHash}" target="_blank" className="alert-link">
         ${transactionHash}</a>`
         })
       }
@@ -412,7 +412,7 @@ class Main extends React.Component<MainProps, MainState> {
     return this.contract?.ownerEnableContract(status, (transactionHash: any) => {
         this.setState({
           msgLog: `Request Transaction Hash:
-        <a href="https://etherscan.io/tx/${transactionHash}" target="_blank" className="alert-link">
+        <a href="${this.networkInfo()?.scanUrl}/tx/${transactionHash}" target="_blank" className="alert-link">
         ${transactionHash}</a>`
         })
       }
@@ -454,7 +454,7 @@ class Main extends React.Component<MainProps, MainState> {
       charityRate, winnerRate, (transactionHash: any) => {
         this.setState({
           msgLog: `Request Transaction Hash:
-        <a href="https://etherscan.io/tx/${transactionHash}" target="_blank" rel="noreferrer" className="alert-link">
+        <a href="${this.networkInfo()?.scanUrl}/tx/${transactionHash}" target="_blank" rel="noreferrer" className="alert-link">
         ${transactionHash}</a>`
         })
       }
@@ -647,7 +647,7 @@ class Main extends React.Component<MainProps, MainState> {
                   <h6>Your address is &nbsp;
                     <a target="_blank"
                        rel="noreferrer"
-                       href={`https://etherscan.io/address/${this.state.playerInfo.playerAddress}`}>
+                       href={`${this.networkInfo()?.scanUrl}/address/${this.state.playerInfo.playerAddress}`}>
                       {this.state.playerInfo.playerAddress}
                     </a>
                   </h6>
@@ -697,7 +697,7 @@ class Main extends React.Component<MainProps, MainState> {
                     <h6>Registered address: &nbsp;
                       <a target="_blank"
                          rel="noreferrer"
-                         href={`https://etherscan.io/address/${this.state.playerInfo.playerAddress}`}>
+                         href={`${this.networkInfo()?.scanUrl}/address/${this.state.playerInfo.playerAddress}`}>
                         {this.state.playerInfo.playerAddress}
                       </a>
                     </h6>
@@ -723,7 +723,7 @@ class Main extends React.Component<MainProps, MainState> {
                   Contract address is &nbsp;
                   <a target="_blank"
                      rel="noreferrer"
-                     href={`https://etherscan.io/address/${this.state.contractAddress}`}>
+                     href={`${this.networkInfo()?.scanUrl}/address/${this.state.contractAddress}`}>
                     {this.state.contractAddress}
                   </a>
                 </h6>
@@ -732,7 +732,7 @@ class Main extends React.Component<MainProps, MainState> {
                   Charity address is &nbsp;
                   <a target="_blank"
                      rel="noreferrer"
-                     href={`https://etherscan.io/address/${this.state.charityAddress}`}>
+                     href={`${this.networkInfo()?.scanUrl}/address/${this.state.charityAddress}`}>
                     {this.state.charityAddress}
                   </a>
                 </h6>
