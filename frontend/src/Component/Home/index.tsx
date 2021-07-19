@@ -117,17 +117,22 @@ class Main extends React.Component<MainProps, MainState> {
           await window['ethereum'].enable()
 
           window['ethereum'].on('accountsChanged', (accounts: any) => {
+            if (this.web3) {
+              this.web3.eth.defaultAccount = accounts[0];
+            }
             this.setState({
               account: accounts[0]
+            }, () => {
+              this.refreshAllData();
             })
-            this.refreshAllData();
           })
 
           window['ethereum'].on('networkChanged', (networkId: string) => {
             this.setState({
               networkId: networkId
+            }, () => {
+              this.reloadNetworkData();
             })
-            this.reloadNetworkData();
           })
         } else if (window['web3']) {
           // Legacy dapp browsers...
@@ -144,6 +149,7 @@ class Main extends React.Component<MainProps, MainState> {
     }
 
     if (this.web3) {
+      this.setState({providerValid: true})
       try {
         await this.web3.eth.getChainId().then((networkId: number) => {
           this.setState({
@@ -152,18 +158,16 @@ class Main extends React.Component<MainProps, MainState> {
         });
         await this.web3.eth.getAccounts((error, accounts) => {
           if (!error && accounts.length !== 0 && this.web3) {
+            this.web3.eth.defaultAccount = accounts[0]
             this.setState({
               account: accounts[0]
+            }, () => {
+              doneCb()
             })
-            this.refreshAllData();
-
-            this.web3.eth.defaultAccount = accounts[0]
-            doneCb()
           } else {
             console.error(error)
           }
         })
-        this.setState({providerValid: true})
       } catch (error) {
         console.error(error)
       }
@@ -570,8 +574,8 @@ class Main extends React.Component<MainProps, MainState> {
 
   componentWillMount() {
     if (!this.web3) this.initWeb3(() => {
-      this.reloadNetworkData()
-    })
+      this.reloadNetworkData();
+    }).then();
   }
 
   render() {
