@@ -123,7 +123,7 @@ class Main extends React.Component<MainProps, MainState> {
             this.setState({
               account: accounts[0]
             }, () => {
-              this.refreshAllData();
+              this.reloadNetworkData();
             })
           })
 
