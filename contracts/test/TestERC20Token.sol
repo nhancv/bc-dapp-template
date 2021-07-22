@@ -3,25 +3,25 @@ pragma solidity 0.8.3;
 
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
-import "../contracts/ERC20Token.sol";
+import "../src/active/ERC20Token.sol";
 
 contract TestERC20Token {
 
-    function testInitialBalanceUsingDeployedContract() public {
-        // nhancv is ERC20Token
-        nhancv meta = nhancv(DeployedAddresses.nhancv());
+  function testInitialBalanceUsingDeployedContract() public {
+    // nhancv is ERC20Token
+    ERC20Token meta = ERC20Token(DeployedAddresses.ERC20Token());
 
-        uint expected = 1000000000000000;
+    uint expected = 777999777000000000000000000;
 
-        Assert.equal(meta.totalSupply(), expected, "Owner should have 1000000000000000 ERC20Token initially");
-    }
+    Assert.equal(meta.totalSupply(), expected, "Owner should have 777999777000000000000000000 ERC20Token initially");
+  }
 
-    function testInitialBalanceWithNewERC20Token() public {
-        ERC20Token meta = new nhancv();
+  function testInitialBalanceWithNewERC20Token() public {
+    ERC20Token meta = new ERC20Token("Nhan Cao", "nhancv", 18, 777999777);
 
-        uint expected = 1000000000000000;
+    uint expected = 777999777000000000000000000;
 
-        Assert.equal(meta.balanceOf(meta.owner()), expected, "Owner should have 1000000000000000 ERC20Token initially");
-    }
+    Assert.equal(meta.balanceOf(meta.owner()), expected, "Owner should have 777999777000000000000000000 ERC20Token initially");
+  }
 
 }
