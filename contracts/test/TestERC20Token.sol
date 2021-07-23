@@ -8,7 +8,6 @@ import "../src/active/ERC20Token.sol";
 contract TestERC20Token {
 
   function testInitialBalanceUsingDeployedContract() public {
-    // nhancv is ERC20Token
     ERC20Token meta = ERC20Token(DeployedAddresses.ERC20Token());
 
     uint expected = 777999777000000000000000000;
