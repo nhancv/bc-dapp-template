@@ -5,8 +5,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Maintainable is Ownable {
 
-  bool public isMaintenance;
-  bool public isOutdated;
+  bool public isMaintenance = false;
+  bool public isOutdated = false;
 
   // Check if contract is not in maintenance
   function ifNotMaintenance() internal view {

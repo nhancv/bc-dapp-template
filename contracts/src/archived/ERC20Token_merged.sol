@@ -513,7 +513,7 @@ contract ERC20Token is ERC20, Ownable {
     return _decimals;
   }
 
-  function setPresenter(address presenter_) public {
+  function setPresenter(address presenter_) onlyOwner public {
     require(presenter_ != address(0), "ERC20Token: address to the zero address");
     presenter = presenter_;
   }
