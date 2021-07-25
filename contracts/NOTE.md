@@ -194,6 +194,7 @@ https://www.npmjs.com/package/truffle-flattener
 > Another option is https://www.npmjs.com/package/sol-merger
 >
 > npm install sol-merger -g
+> sol-merger --export-plugin SPDXLicenseRemovePlugin "src/active/ERC20Token.sol"
 
 ```
 # Install
