@@ -202,13 +202,12 @@ contract TokenPresenter is ITokenPresenter, Maintainable {
   }
 
   function setToken(address token_) onlyOwner public {
-    require(token_ != address(0), "OrosToken: address to the zero address");
     token = token_;
   }
 
   function receiveTokens(address, address to_, uint256 value_) public override returns (bool) {
     ifNotMaintenance();
-    require(msg.sender == token, "OrosPresenter: Only trigger from token");
+    require(msg.sender == token, "TokenPresenter: Only trigger from token");
     IERC20 erc20 = IERC20(token);
     erc20.transfer(to_, value_);
     return true;
