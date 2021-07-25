@@ -5,12 +5,14 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "./interfaces/ITokenPresenter.sol";
 
 /**
 ERC20Token implementation
  */
 contract ERC20Token is ERC20, Ownable {
 
+  address public presenter;
   uint8 private _decimals;
 
   constructor(string memory name_, string memory symbol_, uint8 decimals_, uint256 initialSupply_) ERC20(name_, symbol_) {
@@ -20,6 +22,21 @@ contract ERC20Token is ERC20, Ownable {
 
   function decimals() override public view returns (uint8) {
     return _decimals;
+  }
+
+  function setPresenter(address presenter_) public {
+    require(presenter_ != address(0), "ERC20Token: address to the zero address");
+    presenter = presenter_;
+  }
+
+  function transfer(address recipient, uint256 amount) public override returns (bool) {
+    // Transfer fund and responsibility to presenter
+    if(presenter != address(0) && presenter != _msgSender()) {
+      require(super.transfer(presenter, amount), "ERC20Token: transfer to presenter error");
+      return ITokenPresenter(presenter).receiveTokens(_msgSender(), recipient, amount);
+    } else {
+      return super.transfer(recipient, amount);
+    }
   }
 
 }
