@@ -105,19 +105,23 @@ module.exports = {
     ropsten: {
       provider: () => new HDWalletProvider(MNEMONIC, ROPSTEN_URL),
       network_id: 3,
+      networkCheckTimeout: 90000
     },
     kovan: {
       provider: () => new HDWalletProvider(MNEMONIC, KOVAN_URL),
       network_id: 42,
+      networkCheckTimeout: 90000
     },
     rinkeby: {
       provider: () => new HDWalletProvider(MNEMONIC, RINKEBY_URL),
       network_id: 4,
+      networkCheckTimeout: 90000
     },
     // main ethereum network(mainnet)
     mainnet: {
       provider: () => new HDWalletProvider(MNEMONIC, MAINNET_URL),
       network_id: 1,
+      networkCheckTimeout: 90000
     },
     // bsc test net
     bscTestnet:{
