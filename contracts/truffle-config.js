@@ -105,28 +105,42 @@ module.exports = {
     ropsten: {
       provider: () => new HDWalletProvider(MNEMONIC, ROPSTEN_URL),
       network_id: 3,
-      networkCheckTimeout: 90000
+      skipDryRun: true,
+      networkCheckTimeout: 90000,
+      gas: 4698712,
+      gasPrice: 47000000000
     },
     kovan: {
       provider: () => new HDWalletProvider(MNEMONIC, KOVAN_URL),
       network_id: 42,
-      networkCheckTimeout: 90000
+      skipDryRun: true,
+      networkCheckTimeout: 90000,
+      gas: 4698712,
+      gasPrice: 47000000000
     },
     rinkeby: {
       provider: () => new HDWalletProvider(MNEMONIC, RINKEBY_URL),
       network_id: 4,
-      networkCheckTimeout: 90000
+      skipDryRun: true,
+      networkCheckTimeout: 90000,
+      gas: 4698712,
+      gasPrice: 47000000000
     },
     // main ethereum network(mainnet)
     mainnet: {
       provider: () => new HDWalletProvider(MNEMONIC, MAINNET_URL),
       network_id: 1,
-      networkCheckTimeout: 90000
+      // skipDryRun: true,
+      networkCheckTimeout: 90000,
+      gas: 4698712,
+      gasPrice: 47000000000
     },
     // bsc test net
-    bscTestnet:{
+    bscTestnet: {
       provider: () => new HDWalletProvider(MNEMONIC, "https://data-seed-prebsc-1-s1.binance.org:8545"),
       network_id: 97,
+      skipDryRun: true,
+      networkCheckTimeout: 90000,
       gas: 4698712,
       gasPrice: 25000000000
     },
@@ -134,6 +148,10 @@ module.exports = {
     bscMainnet: {
       provider: () => new HDWalletProvider(MNEMONIC, "https://bsc-dataseed.binance.org"),
       network_id: 56,
+      // skipDryRun: true,
+      networkCheckTimeout: 90000,
+      gas: 4698712,
+      gasPrice: 25000000000
     },
   },
 
@@ -158,11 +176,11 @@ module.exports = {
       version: "0.8.3",
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       settings: {          // See the solidity docs for advice about optimization and evmVersion
-       optimizer: {
-         enabled: false,
-         runs: 200
-       },
-       evmVersion: "byzantium"
+        optimizer: {
+          enabled: false,
+          runs: 200
+        },
+        evmVersion: "byzantium"
       }
     }
   },
