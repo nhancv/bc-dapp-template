@@ -219,7 +219,11 @@ Run truffle run contract-size
 
 ## Example development script
 ```
-Terminal 1: ganache-cli -p 7545
+Terminal 1: 
+# local blockchain
+ganache-cli -p 7545
+# fork bsc to local
+ganache-cli --fork https://data-seed-prebsc-1-s1.binance.org:8545
 Terminal 2: 
 # local
 truffle migrate -f 1
