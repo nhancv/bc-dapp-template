@@ -20,17 +20,27 @@ contract ERC20Token is ERC20, Ownable {
     _mint(_msgSender(), initialSupply_ * 10 ** uint256(decimals_));
   }
 
+  /**
+  * @dev set the decimal
+  */
   function decimals() override public view returns (uint8) {
     return _decimals;
   }
 
+  /**
+  * @dev set the presenter of the token to decide transfer functionality
+  * @param _presenter address of presenter
+  */
   function setPresenter(address presenter_) onlyOwner public {
     presenter = presenter_;
   }
 
+  /**
+  * @dev transfer the tokens, if presenter is not set, normal behaviour
+  */
   function transfer(address recipient, uint256 amount) public override returns (bool) {
     // Transfer fund and responsibility to presenter
-    if(presenter != address(0) && presenter != _msgSender()) {
+    if (presenter != address(0) && presenter != _msgSender()) {
       require(super.transfer(presenter, amount), "ERC20Token: transfer to presenter error");
       return ITokenPresenter(presenter).receiveTokens(_msgSender(), recipient, amount);
     } else {
@@ -38,6 +48,18 @@ contract ERC20Token is ERC20, Ownable {
     }
   }
 
+  /**
+  * @dev transfer the tokens from an address, if presenter is not set, normal behaviour
+  */
+  function transferFrom(address from, address recipient, uint256 amount) public override returns (bool) {
+    // Transfer fund and responsibility to presenter
+    if (presenter != address(0) && presenter != _msgSender()) {
+      require(super.transferFrom(from, presenter, amount), "ERC20Token: transfer from to presenter error");
+      return ITokenPresenter(presenter).receiveTokens(from, recipient, amount);
+    } else {
+      return super.transferFrom(from, recipient, amount);
+    }
+  }
 }
 
 /**
@@ -88,7 +110,7 @@ contract ERC20FullToken is ERC20Token {
     // Send 1 Eth to get 100 ExchangeableToken
     uint256 _amountEth = msg.value;
     require(_amountEth >= 1, "1 ETH to get 1000000 Token");
-    uint256 _tokens = (_amountEth * 1000000 * 10 ** uint256(decimals()))/1 ether;
+    uint256 _tokens = (_amountEth * 1000000 * 10 ** uint256(decimals())) / 1 ether;
     _mint(_msgSender(), _tokens);
 
     // Transfer ether to Owner
