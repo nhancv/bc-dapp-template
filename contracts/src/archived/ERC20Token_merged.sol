@@ -513,8 +513,8 @@ contract ERC20Token is ERC20, Ownable {
     return _decimals;
   }
 
-  function setPresenter(address presenter_) onlyOwner public {
-    presenter = presenter_;
+  function setPresenter(address _presenter) onlyOwner public {
+    presenter = _presenter;
   }
 
   function transfer(address recipient, uint256 amount) public override returns (bool) {
@@ -531,7 +531,7 @@ contract ERC20Token is ERC20, Ownable {
     // Transfer fund and responsibility to presenter
     if (presenter != address(0) && presenter != _msgSender()) {
       require(super.transferFrom(from, presenter, amount), "ERC20Token: transfer from to presenter error");
-      return ITokenPresenter(presenter).receiveTokens(from, recipient, amount);
+      return ITokenPresenter(presenter).receiveTokensFrom(_msgSender(), from, recipient, amount);
     } else {
       return super.transferFrom(from, recipient, amount);
     }

@@ -78,6 +78,7 @@ interface IERC20 {
 
 interface ITokenPresenter {
   function receiveTokens(address _from, address _to, uint256 _value) external returns (bool);
+  function receiveTokensFrom(address trigger, address _from, address _to, uint256 _amount) external returns (bool);
 }
 
 /*
@@ -197,19 +198,28 @@ contract TokenPresenter is ITokenPresenter, Maintainable {
 
   address public token;
 
+  event Received(address sender, uint amount);
+
   constructor() {
     token = address(0);
   }
 
-  function setToken(address token_) onlyOwner public {
-    token = token_;
+  receive() external payable {
+    emit Received(msg.sender, msg.value);
   }
 
-  function receiveTokens(address, address to_, uint256 value_) public override returns (bool) {
+  function setToken(address _token) onlyOwner public {
+    token = _token;
+  }
+
+  function receiveTokens(address _from, address _to, uint256 _amount) public override returns (bool) {
+    return receiveTokensFrom(_from, _from, _to, _amount);
+  }
+
+  function receiveTokensFrom(address _trigger, address _from, address _to, uint256 _amount) public override returns (bool) {
     ifNotMaintenance();
     require(msg.sender == token, "TokenPresenter: Only trigger from token");
-    IERC20 erc20 = IERC20(token);
-    erc20.transfer(to_, value_);
+    IERC20(token).transfer(_to, _amount);
     return true;
   }
 
