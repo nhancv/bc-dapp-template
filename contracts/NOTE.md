@@ -1,18 +1,22 @@
 ## [For local deployment] Development env
+
 - Option1: Install Ganache -> Start Ganache and create new project by point to `truffle-config.js` file
 - Option2: Install Ganache Cli: https://github.com/trufflesuite/ganache-cli
 
 ## For auto publish and verify contract
 
 Docs:
+
 - https://forum.openzeppelin.com/t/verify-smart-contract-inheriting-from-openzeppelin-contracts/4119
 - https://github.com/rkalis/truffle-plugin-verify#readme
 - https://docs.binance.org/smart-chain/developer/deploy/truffle-verify.html
 
 ## [For Ethereum] Get Web3 Api key from Infura.io Real network
+
 - Register new account on infura.io
 - Create new project
 - Get project api and connection link:
+
 ```
 ROPSTEN_URL=https://ropsten.infura.io/v3/<your-api-key>
 KOVAN_URL=https://kovan.infura.io/v3/<your-api-key>
@@ -21,7 +25,9 @@ MAINNET_URL=https://mainnet.infura.io/v3/<your-api-key>
 ```
 
 ## Preparing deployment configuration
+
 - Go to Truffle project, install node libs
+
 ```
 npm install truffle-hdwallet-provider --save
 npm install bip39 dotenv --save
@@ -31,11 +37,15 @@ npm install truffle-plugin-verify
 * bip39 – used to generate wallet mnemonic
 * dotenv – simple way to read environment variable files
 ```
+
 - Generate MNEMONIC words
+
 ```
 node -e "console.log(require('bip39').generateMnemonic())"
 ```
-- Create `.env` file, put MNEMONIC and <network>_URL to file
+
+- Create `.env` file, put MNEMONIC and <network>\_URL to file
+
 ```
 MNEMONIC=wallet mnemonic 12 words
 ROPSTEN_URL=https://ropsten.infura.io/v3/<your-api-key>
@@ -45,7 +55,9 @@ MAINNET_URL=https://mainnet.infura.io/v3/<your-api-key>
 ETHERSCANAPI_KEY=<from https://etherscan.io>
 BSCSCANAPI_KEY=<from https://bscscan.com>
 ```
+
 - Update truffle-config.js file
+
 ```
 require('dotenv').config()
 const HDWalletProvider = require('truffle-hdwallet-provider')
@@ -117,7 +129,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: ">=0.6.0 <=0.8.4", 
+      version: ">=0.6.0 <=0.8.4",
     }
   },
 
@@ -130,6 +142,7 @@ module.exports = {
 ```
 
 - To get public wallet address
+
 ```
 truffle console --network <network>
 truffle(ropsten)> web3.eth.getAccounts((err, accounts) => console.log(accounts))
@@ -137,9 +150,10 @@ eg:
 truffle console --network ropsten
 truffle(ropsten)> web3.eth.getAccounts((err, accounts) => console.log(accounts))
 [ '0x627306090abab3a6e1400e9345bc60c78a8bef57' ]
-``` 
+```
 
 - Prepare some eth/bsc from test network faucet
+
 ```
 https://faucet.metamask.io/
 https://faucet.ropsten.be/
@@ -152,20 +166,21 @@ https://testnet.binance.org/faucet-smart
 
 - Remove old build api built files
 - Run migrate
+
 ```
 # For local network
 truffle migrate
 
 # Fow specific network
 truffle migrate --network <network>
-eg: 
+eg:
 truffle migrate --network ropsten
 truffle migrate --network mainnet
 
 # Compile & Migrate contract only (Replace if exist and Deploy for new one)
 truffle migrate -f 2 --network ropsten
 
-# Compile & Deploy new contract (not replace) 
+# Compile & Deploy new contract (not replace)
 truffle migrate -f 1 --network bscTestnet
 ```
 
@@ -191,21 +206,25 @@ Successfully verified 1 contract(s).
 Truffle Flattener concats solidity files from Truffle with all of their dependencies.
 https://www.npmjs.com/package/truffle-flattener
 
-> Another option is https://www.npmjs.com/package/sol-merger
+```
+# Install
+npm install truffle-flattener -g
+
+# Usage: Just intall it with npm in your truffle project and run
+truffle-flattener <solidity-files>.
+
+# Limitations: Aliased imports (eg: import {symbol1 as alias, symbol2} from "filename";) are not supported by truffle-flattener.
+```
+
+> Flatten with https://www.npmjs.com/package/sol-merger
 >
 > npm install sol-merger -g
 > sol-merger "src/active/ERC20Token.sol"
 > sol-merger --export-plugin SPDXLicenseRemovePlugin "src/active/ERC20Token.sol"
 
-```
-# Install
-npm install truffle-flattener -g
-
-# Usage: Just intall it with npm in your truffle project and run 
-truffle-flattener <solidity-files>.
-
-# Limitations: Aliased imports (eg: import {symbol1 as alias, symbol2} from "filename";) are not supported by truffle-flattener.
-```
+> Flatten with hardhat
+>
+> npx hardhat flatten "src/active/ERC20Token.sol" > ERC20Token_flat.sol
 
 ## Max contract size
 
@@ -218,13 +237,14 @@ Run truffle run contract-size
 ```
 
 ## Example development script
+
 ```
-Terminal 1: 
+Terminal 1:
 # local blockchain
 ganache-cli -p 7545
 # fork bsc to local
 ganache-cli --fork https://data-seed-prebsc-1-s1.binance.org:8545
-Terminal 2: 
+Terminal 2:
 # local
 truffle migrate -f 1
 # bsc testnet
@@ -237,6 +257,7 @@ truffle run verify ERC20Token --network bscMainnet
 ```
 
 ## Deploy ERC721 contract on public testnet Rinkeby
+
 ```
 # Compile
 truffle compile
@@ -286,7 +307,7 @@ truffle(rinkeby)> await nft.ownerOf(3)
 '0xFd0c67EDD5e4cE03cd8397Dc748b19b0A5c0f645'
 ```
 
-* After mint the first item, we can check on Opensea
+- After mint the first item, we can check on Opensea
 
 ```
 - Fill Contract address here: https://testnets.opensea.io/get-listed/step-two

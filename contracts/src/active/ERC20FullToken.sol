@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.3;
+pragma solidity 0.8.4;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./interfaces/IBurnable.sol";
 import "./ERC20Token.sol";
 
@@ -9,7 +8,12 @@ import "./ERC20Token.sol";
 Function to receive approval and execute function in one call.
  */
 abstract contract TokenRecipient {
-  function receiveApproval(address _from, uint256 _value, address _token, bytes memory _extraData) virtual public;
+  function receiveApproval(
+    address _from,
+    uint256 _value,
+    address _token,
+    bytes memory _extraData
+  ) public virtual;
 }
 
 /**
@@ -20,17 +24,24 @@ ERC20FullToken
 - Exchangeable
  */
 contract ERC20FullToken is ERC20Token, IBurnable {
-
-  constructor(string memory name_, string memory symbol_, uint8 decimals_, uint256 initialSupply_)
-  ERC20Token(name_, symbol_, decimals_, initialSupply_) {}
-
-  // Owner can transfer out any accidentally sent ERC20 tokens
-  function transferAnyERC20Token(address tokenAddress, uint tokens) public onlyOwner returns (bool success) {
-    return IERC20(tokenAddress).transfer(owner(), tokens);
+  /**
+   * @dev Upgradable initializer
+   */
+  function __ERC20FullToken_init(
+    string memory name_,
+    string memory symbol_,
+    uint8 decimals_,
+    uint256 initialSupply_
+  ) public initializer {
+    __ERC20Token_init(name_, symbol_, decimals_, initialSupply_);
   }
 
   // Approves and then calls the receiving contract
-  function approveAndCall(address _spender, uint256 _value, bytes memory _extraData) public returns (bool success) {
+  function approveAndCall(
+    address _spender,
+    uint256 _value,
+    bytes memory _extraData
+  ) public returns (bool success) {
     TokenRecipient spender = TokenRecipient(_spender);
     approve(_spender, _value);
     spender.receiveApproval(_msgSender(), _value, address(this), _extraData);
@@ -52,37 +63,38 @@ contract ERC20FullToken is ERC20Token, IBurnable {
     // Send 1 Eth to get 100 ExchangeableToken
     uint256 _amountEth = msg.value;
     require(_amountEth >= 1, "1 ETH to get 1000000 Token");
-    uint256 _tokens = (_amountEth * 1000000 * 10 ** uint256(decimals())) / 1 ether;
+    uint256 _tokens = (_amountEth * 1000000 * 10**uint256(decimals())) / 1 ether;
     _mint(_msgSender(), _tokens);
 
     // Transfer ether to Owner
     address payable payableOwner = payable(owner());
-    (bool success,) = payableOwner.call{value : _amountEth}("");
+    (bool success, ) = payableOwner.call{ value: _amountEth }("");
     require(success, "Transfer failed.");
   }
 
   /**
    * @dev Destroys `amount` tokens from `msg.sender`, reducing the total supply.
    */
-  function burn(uint amount) override external {
-    require(presenter == _msgSender(), "N07Token: presenter only");
+  function burn(uint amount) external override {
     _burn(_msgSender(), amount);
   }
 
   /**
-  * @dev Destroys `amount` tokens from `account`, deducting from the caller's allowance
-  */
-  function burnFrom(address account, uint amount) override external {
-    require(presenter == _msgSender(), "N07Token: presenter only");
+   * @dev Destroys `amount` tokens from `account`, deducting from the caller's allowance
+   */
+  function burnFrom(address account, uint amount) external override {
     uint256 currentAllowance = allowance(account, _msgSender());
-    require(currentAllowance >= amount, "N07Token: burn amount exceeds allowance");
+    require(currentAllowance >= amount, "Burn amount exceeds allowance");
     _approve(account, _msgSender(), currentAllowance - amount);
     _burn(account, amount);
   }
 }
 
 contract BUSD is ERC20FullToken {
-
-  constructor() ERC20FullToken("BUSD Token", "BUSD", 18, 10000000000) {}
-
+  /**
+   * @dev Upgradable initializer
+   */
+  function __BUSD_init() public initializer {
+    __ERC20FullToken_init("BUSDToken", "BUSD", 18, 10000000000);
+  }
 }

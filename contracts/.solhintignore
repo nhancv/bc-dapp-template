@@ -1,0 +1,5 @@
+node_modules/
+migrations/
+src/archived/
+src/stash/
+test/test_archived/

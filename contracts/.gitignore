@@ -2,6 +2,5 @@
 !.env.example
 node_modules
 .idea
-.openzeppelin
 *.DS_Store
 src/abis

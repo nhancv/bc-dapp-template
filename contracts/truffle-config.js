@@ -24,18 +24,17 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
-require('dotenv').config()
-const HDWalletProvider = require('truffle-hdwallet-provider')
-const MNEMONIC = process.env.MNEMONIC
-const ROPSTEN_URL = process.env.ROPSTEN_URL
-const KOVAN_URL = process.env.KOVAN_URL
-const RINKEBY_URL = process.env.RINKEBY_URL
-const MAINNET_URL = process.env.MAINNET_URL
-const ETHERSCANAPI_KEY = process.env.ETHERSCANAPI_KEY
-const BSCSCANAPI_KEY = process.env.BSCSCANAPI_KEY
+require("dotenv").config();
+const HDWalletProvider = require("truffle-hdwallet-provider");
+const MNEMONIC = process.env.MNEMONIC;
+const ROPSTEN_URL = process.env.ROPSTEN_URL;
+const KOVAN_URL = process.env.KOVAN_URL;
+const RINKEBY_URL = process.env.RINKEBY_URL;
+const MAINNET_URL = process.env.MAINNET_URL;
+const ETHERSCANAPI_KEY = process.env.ETHERSCANAPI_KEY;
+const BSCSCANAPI_KEY = process.env.BSCSCANAPI_KEY;
 
 module.exports = {
-
   // Uncommenting the defaults below
   // provides for an easier quick-start with Ganache.
   // You can also follow this format for other networks;
@@ -92,13 +91,13 @@ module.exports = {
     // }
     development: {
       host: "127.0.0.1",
-      port: 7545,
+      port: 8545,
       network_id: "*",
       websockets: true,
     },
     test: {
       host: "127.0.0.1",
-      port: 7545,
+      port: 8545,
       network_id: "*",
       websockets: true,
     },
@@ -107,24 +106,24 @@ module.exports = {
       network_id: 3,
       skipDryRun: true,
       networkCheckTimeout: 90000,
-      gas: 4698712,
-      gasPrice: 47000000000
+      // gas: 4698712,
+      gasPrice: 47000000000,
     },
     kovan: {
       provider: () => new HDWalletProvider(MNEMONIC, KOVAN_URL),
       network_id: 42,
       skipDryRun: true,
       networkCheckTimeout: 90000,
-      gas: 4698712,
-      gasPrice: 47000000000
+      // gas: 4698712,
+      gasPrice: 47000000000,
     },
     rinkeby: {
       provider: () => new HDWalletProvider(MNEMONIC, RINKEBY_URL),
       network_id: 4,
       skipDryRun: true,
       networkCheckTimeout: 90000,
-      gas: 4698712,
-      gasPrice: 47000000000
+      // gas: 4698712,
+      gasPrice: 47000000000,
     },
     // main ethereum network(mainnet)
     mainnet: {
@@ -132,57 +131,60 @@ module.exports = {
       network_id: 1,
       // skipDryRun: true,
       networkCheckTimeout: 90000,
-      gas: 4698712,
-      gasPrice: 47000000000
+      // gas: 4698712,
+      gasPrice: 47000000000,
     },
     // bsc test net
     bscTestnet: {
-      provider: () => new HDWalletProvider(MNEMONIC, "https://data-seed-prebsc-1-s1.binance.org:8545"),
+      provider: () =>
+        new HDWalletProvider(
+          MNEMONIC,
+          "https://data-seed-prebsc-1-s1.binance.org:8545"
+        ),
       network_id: 97,
       skipDryRun: true,
       networkCheckTimeout: 90000,
-      gas: 4698712,
-      gasPrice: 5000000000
+      // gas: 4698712,
+      gasPrice: 10000000000,
     },
     // bsc main net
     bscMainnet: {
-      provider: () => new HDWalletProvider(MNEMONIC, "https://bsc-dataseed.binance.org"),
+      provider: () =>
+        new HDWalletProvider(MNEMONIC, "https://bsc-dataseed.binance.org"),
       network_id: 56,
       // skipDryRun: true,
       networkCheckTimeout: 90000,
-      gas: 4698712, // can up to 100M
-      gasPrice: 5000000000
+      // gas: 4698712, // can up to 100M
+      gasPrice: 5000000000,
     },
   },
 
   // Set default mocha options here, use special reporters etc.
   mocha: {
-    // timeout: 100000
+    timeout: 1000000000,
   },
 
   // Auto publish and verify contract
-  plugins: [
-    'truffle-plugin-verify',
-    'truffle-contract-size'
-  ],
+  plugins: ["truffle-plugin-verify", "truffle-contract-size"],
   api_keys: {
     etherscan: ETHERSCANAPI_KEY,
-    bscscan: BSCSCANAPI_KEY
+    bscscan: BSCSCANAPI_KEY,
   },
 
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.3",
+      version: "0.8.4",
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-      settings: {          // See the solidity docs for advice about optimization and evmVersion
+      settings: {
+        // See the solidity docs for advice about optimization and evmVersion
         optimizer: {
           enabled: false,
-          runs: 200
+          runs: 200,
         },
-        evmVersion: "byzantium"
-      }
-    }
+        evmVersion: "byzantium",
+      },
+    },
   },
 
   // Truffle DB is currently disabled by default; to enable it, change enabled: false to enabled: true
@@ -192,6 +194,6 @@ module.exports = {
   // $ truffle migrate --reset --compile-all
 
   db: {
-    enabled: false
-  }
+    enabled: false,
+  },
 };

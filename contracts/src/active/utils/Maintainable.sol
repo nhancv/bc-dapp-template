@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.3;
+pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract Maintainable is Ownable {
-
-  bool public isMaintenance = false;
-  bool public isOutdated = false;
+contract Maintainable is OwnableUpgradeable {
+  bool public isMaintenance;
+  bool public isOutdated;
 
   // Check if contract is not in maintenance
   function ifNotMaintenance() internal view {
@@ -20,14 +19,12 @@ contract Maintainable is Ownable {
   }
 
   // Enable maintenance
-  function enableMaintenance(bool status) onlyOwner public {
+  function enableMaintenance(bool status) public onlyOwner {
     isMaintenance = status;
   }
 
   // Enable outdated
-  function enableOutdated(bool status) onlyOwner public {
+  function enableOutdated(bool status) public onlyOwner {
     isOutdated = status;
   }
-
 }
-

@@ -1,0 +1,137 @@
+crypto.contracts|master⚡ ⇒ truffle migrate -f 2 --to 2 --network bscTestnet --reset  --all
+> Warning: possible unsupported (undocumented in help) command line option(s): --all
+
+Compiling your contracts...
+===========================
+> Compiling ./src/active/Box.sol
+> Compiling ./src/active/BoxV2.sol
+> Compiling ./src/active/ERC20FullToken.sol
+> Compiling ./src/active/ERC20Token.sol
+> Compiling ./src/active/Migration.sol
+> Compiling ./src/active/TokenPresenter.sol
+> Compiling ./src/active/interfaces/IBurnable.sol
+> Compiling ./src/active/interfaces/ITokenPresenter.sol
+> Compiling ./src/active/utils/AntiWhale.sol
+> Compiling ./src/active/utils/EmergencyWithdraw.sol
+> Compiling ./src/active/utils/Maintainable.sol
+> Compiling @openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol
+> Compiling @openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol
+> Compiling @openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol
+> Compiling @openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol
+> Compiling @openzeppelin/contracts/access/Ownable.sol
+> Compiling @openzeppelin/contracts/token/ERC20/ERC20.sol
+> Compiling @openzeppelin/contracts/token/ERC20/IERC20.sol
+> Compiling @openzeppelin/contracts/utils/Context.sol
+> Compilation warnings encountered:
+
+    Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> project:/src/active/TokenPresenter.sol:32:26:
+   |
+32 |   function receiveTokens(address _trigger, address _from, address _to, uint256 _amount) public override returns (bool) {
+   |                          ^^^^^^^^^^^^^^^^
+
+,Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> project:/src/active/TokenPresenter.sol:32:44:
+   |
+32 |   function receiveTokens(address _trigger, address _from, address _to, uint256 _amount) public override returns (bool) {
+   |                                            ^^^^^^^^^^^^^
+
+
+> Artifacts written to /Volumes/Data/Projects/company/_boilerplates/crypto.contracts/src/abis
+> Compiled successfully using:
+   - solc: 0.8.4+commit.c7e474f2.Emscripten.clang
+
+
+
+Starting migrations...
+======================
+> Network name:    'bscTestnet'
+> Network id:      97
+> Block gas limit: 29882814 (0x1c7f9be)
+
+
+2_upgrade_box_contracts.js
+==========================
+
+   Replacing 'Box'
+   ---------------
+   > transaction hash:    0x93ed952f7ab178319bf02af784a404cf20f6573f77c44f42a00f99b7e1a0d090
+   > Blocks: 2            Seconds: 4
+   > contract address:    0x4DE65E961A8A19C2edb057c3ce5Dd3BD3Fe915d4
+   > block number:        12104290
+   > block timestamp:     1630853817
+   > account:             0x67c78a0FADDB29298aF8873dE72Ea5654307BFf2
+   > balance:             16.425199837051055847
+   > gas used:            699558 (0xaaca6)
+   > gas price:           10 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00699558 ETH
+
+
+   Deploying 'ProxyAdmin'
+   ----------------------
+   > transaction hash:    0x56a97970fbc9f56f7d08b836b858860b9989c9aa9c187089575e3193b4088431
+   > Blocks: 3            Seconds: 8
+   > contract address:    0xDa808402153b8d4a839322312E512cAf0DDB6ec7
+   > block number:        12104295
+   > block timestamp:     1630853832
+   > account:             0x67c78a0FADDB29298aF8873dE72Ea5654307BFf2
+   > balance:             16.420372637051055847
+   > gas used:            482720 (0x75da0)
+   > gas price:           10 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0048272 ETH
+
+
+   Deploying 'TransparentUpgradeableProxy'
+   ---------------------------------------
+   > transaction hash:    0x45c2ccdf44113ca3a28ff16b4f64e36ac0feb5f1b78e989ab0f5eacb5f123870
+   > Blocks: 3            Seconds: 8
+   > contract address:    0x87aE55AE394A277e83B8528da6E50CA722f6876A
+   > block number:        12104300
+   > block timestamp:     1630853847
+   > account:             0x67c78a0FADDB29298aF8873dE72Ea5654307BFf2
+   > balance:             16.413689087051055847
+   > gas used:            668355 (0xa32c3)
+   > gas price:           10 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00668355 ETH
+
+BoxV1: 0x87aE55AE394A277e83B8528da6E50CA722f6876A
+BoxV1 owner:  0x67c78a0FADDB29298aF8873dE72Ea5654307BFf2
+
+   Replacing 'BoxV2'
+   -----------------
+   > transaction hash:    0xe45edbdc1229eee5bd05d5d70232a8c269381d8ea9a97630f59182413a97ec0f
+   > Blocks: 3            Seconds: 8
+   > contract address:    0x5E707415282bA9211f2e4E15eE5c4300d04E5F48
+   > block number:        12104306
+   > block timestamp:     1630853865
+   > account:             0x67c78a0FADDB29298aF8873dE72Ea5654307BFf2
+   > balance:             16.406156897051055847
+   > gas used:            753219 (0xb7e43)
+   > gas price:           10 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00753219 ETH
+
+BoxV2: 0x87aE55AE394A277e83B8528da6E50CA722f6876A
+BoxV2 owner: 0x67c78a0FADDB29298aF8873dE72Ea5654307BFf2
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.02603852 ETH
+
+
+Summary
+=======
+> Total deployments:   4
+> Final cost:          0.02603852 ETH
+
+crypto.contracts|master⚡ ⇒ truffle run verify Box@0x4DE65E961A8A19C2edb057c3ce5Dd3BD3Fe915d4 --network bscTestnet
+Verifying Box@0x4DE65E961A8A19C2edb057c3ce5Dd3BD3Fe915d4
+Pass - Verified: https://testnet.bscscan.com/address/0x4DE65E961A8A19C2edb057c3ce5Dd3BD3Fe915d4#contracts
+Successfully verified 1 contract(s).
+crypto.contracts|master⚡ ⇒ truffle run verify BoxV2@0x5E707415282bA9211f2e4E15eE5c4300d04E5F48 --network bscTestnet
+Verifying BoxV2@0x5E707415282bA9211f2e4E15eE5c4300d04E5F48
+Pass - Verified: https://testnet.bscscan.com/address/0x5E707415282bA9211f2e4E15eE5c4300d04E5F48#contracts
+Successfully verified 1 contract(s).
+crypto.contracts|master⚡ ⇒

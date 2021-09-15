@@ -1,30 +1,46 @@
 {
-  "name": "smartcontracts",
+  "name": "crypto.contracts",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/solhint -f table src/active/*.sol src/active/**/*.sol -w 0",
+    "format": "./node_modules/.bin/prettier --write src/active/*.sol src/active/**/*.sol",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@openzeppelin/contracts": "^4.0.0",
-    "@openzeppelin/contracts-upgradeable": "^4.0.0",
-    "@openzeppelin/test-helpers": "^0.5.11",
-    "@openzeppelin/truffle-upgrades": "^1.5.0",
-    "bip39": "^3.0.3",
+    "@openzeppelin/contracts": "^4.3.1",
+    "@openzeppelin/contracts-upgradeable": "^4.3.1",
+    "@openzeppelin/test-helpers": "^0.5.13",
+    "@openzeppelin/truffle-upgrades": "^1.9.1",
+    "bignumber.js": "^9.0.1",
+    "bip39": "^3.0.4",
     "chai": "^4.3.4",
-    "dotenv": "^8.2.0",
-    "ethers": "^5.2.0",
+    "dotenv": "^10.0.0",
+    "ethers": "^5.4.6",
     "from-exponential": "^1.1.1",
     "moment": "^2.29.1",
+    "pretty-num": "^0.5.0",
     "readline": "^1.3.0",
     "truffle-assertions": "^0.9.2",
     "truffle-contract-size": "^2.0.1",
     "truffle-hdwallet-provider": "^1.0.17",
-    "truffle-plugin-verify": "^0.5.8",
-    "web3": "^1.2.1"
+    "truffle-plugin-verify": "^0.5.14",
+    "web3": "^1.5.2"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "ethereum-waffle": "^3.4.0",
+    "hardhat": "^2.6.3",
+    "husky": "^7.0.2",
+    "prettier": "^2.4.0",
+    "prettier-plugin-solidity": "^1.0.0-beta.18",
+    "pretty-quick": "^3.1.1",
+    "solhint": "^3.3.6",
+    "solhint-plugin-prettier": "^0.0.5"
   }
 }
