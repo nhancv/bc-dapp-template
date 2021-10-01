@@ -25,7 +25,7 @@
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 require("dotenv").config();
-const HDWalletProvider = require("truffle-hdwallet-provider");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 const MNEMONIC = process.env.MNEMONIC;
 const ROPSTEN_URL = process.env.ROPSTEN_URL;
 const KOVAN_URL = process.env.KOVAN_URL;
