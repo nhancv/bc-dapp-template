@@ -1,27 +1,27 @@
-import * as React from 'react'
-import {Col, Container, Row} from 'reactstrap'
-import './style.css'
+import * as React from "react";
+import { Col, Container, Row } from "reactstrap";
+import "./style.css";
 
-const clipHowToBuy = require('./crypto_lottery_clip_how_to_buy.mp4')
-const clipInstruction = require('./crypto_lottery_clip_instruction.mp4')
-const cryptoLotteryDistribution = require('./crypto_lottery_distribution.jpg')
+const clipHowToBuy = require("./crypto_lottery_clip_how_to_buy.mp4");
+const clipInstruction = require("./crypto_lottery_clip_instruction.mp4");
+const cryptoLotteryDistribution = require("./crypto_lottery_distribution.jpg");
 
 type MainProps = {}
 type MainState = {}
 
 class Main extends React.Component<MainProps, MainState> {
   // Set default props
-  static defaultProps = {}
+  static defaultProps = {};
 
   constructor(props: MainProps) {
-    super(props)
-    this.state = {}
+    super(props);
+    this.state = {};
   }
 
   render() {
     return (
       <Container className="App-container-fix-height">
-        <br/>
+        <br />
         <Row>
           <Col>
             <h1>Crypto Lottery</h1>
@@ -29,7 +29,7 @@ class Main extends React.Component<MainProps, MainState> {
               Crypto Lottery allows players to purchase some hopeful numbers. The system will random one lucky number
               and the fund will be distributed to every player who keeps the number same as the system.
             </h6>
-            <br/>
+            <br />
 
             <h2>What excited game is?</h2>
             <h6>
@@ -60,7 +60,7 @@ class Main extends React.Component<MainProps, MainState> {
               </li>
               <li>Happy Crypto Lottery!!!</li>
             </ul>
-            <br/>
+            <br />
 
             <h3>Game Rules</h3>
             <h5>
@@ -83,7 +83,7 @@ class Main extends React.Component<MainProps, MainState> {
                 remaining will be divided for charity fund and developer.
               </li>
             </ul>
-            <br/>
+            <br />
 
             <h5>Crypto Lottery Distribution</h5>
             <ul>
@@ -94,37 +94,37 @@ class Main extends React.Component<MainProps, MainState> {
               <li>5% for developers</li>
             </ul>
 
-            <img src={cryptoLotteryDistribution} className="img-fluid" alt="Crypto Lottery Distribution"/>
+            <img src={cryptoLotteryDistribution} className="img-fluid" alt="Crypto Lottery Distribution" />
 
-            <br/>
-            <br/>
+            <br />
+            <br />
 
             <h5>Crypto Lottery Instruction</h5>
-            <video className={'video-border'} width="100%" height="auto" controls={true}>
-              <source src={clipInstruction} type="video/mp4"/>
+            <video className={"video-border"} width="100%" height="auto" controls={true}>
+              <source src={clipInstruction} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            <br/>
-            <br/>
+            <br />
+            <br />
 
             <h5>Crypto Lottery How To Buy</h5>
-            <video className={'video-border'} width="100%" height="auto" controls={true}>
-              <source src={clipHowToBuy} type="video/mp4"/>
+            <video className={"video-border"} width="100%" height="auto" controls={true}>
+              <source src={clipHowToBuy} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            <br/>
+            <br />
 
             <h5>Crypto Lottery Contact</h5>
             <h6>
               cryptolott.io@gmail.com
             </h6>
-            <br/>
+            <br />
 
           </Col>
         </Row>
       </Container>
-    )
+    );
   }
 }
 
-export default Main
+export default Main;

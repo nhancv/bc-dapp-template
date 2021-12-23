@@ -4,37 +4,54 @@
   margin-left: 0 !important;
   text-align: center !important;
   justify-content: center !important;
-  color: red; }
+  color: red;
+}
 
 .container {
   overflow: scroll;
   -ms-overflow-style: none;
-  scrollbar-width: none; }
-  .container .break-line {
-    height: 1px;
-    width: 300px;
-    margin: 1rem auto;
-    background-color: white; }
-  .container .Vote-Card {
-    width: 300px;
-    float: left;
-    margin: 10px; }
-  .container .Player-input {
-    margin: 5px; }
-    .container .Player-input input {
-      text-align: center; }
-  .container .btn-primary {
-    color: #fff;
-    background-color: #206A25;
-    border-color: #206A25; }
-  .container .btn-primary.disabled, .container .btn-primary:disabled {
-    color: #fff;
-    background-color: #206A25;
-    border-color: #206A25; }
-  .container .btn-primary:hover {
-    color: #fff;
-    background-color: #49994b;
-    border-color: #49994b; }
+  scrollbar-width: none;
+}
+
+.container .break-line {
+  height: 1px;
+  width: 300px;
+  margin: 1rem auto;
+  background-color: white;
+}
+
+.container .Vote-Card {
+  width: 300px;
+  float: left;
+  margin: 10px;
+}
+
+.container .Player-input {
+  margin: 5px;
+}
+
+.container .Player-input input {
+  text-align: center;
+}
+
+.container .btn-primary {
+  color: #fff;
+  background-color: #206A25;
+  border-color: #206A25;
+}
+
+.container .btn-primary.disabled, .container .btn-primary:disabled {
+  color: #fff;
+  background-color: #206A25;
+  border-color: #206A25;
+}
+
+.container .btn-primary:hover {
+  color: #fff;
+  background-color: #49994b;
+  border-color: #49994b;
+}
 
 .container::-webkit-scrollbar {
-  display: none; }
+  display: none;
+}

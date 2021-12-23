@@ -8,6 +8,10 @@
 ## Build Frontend
 ```
 cd frontend
+yarn install
+yarn start
+
+[Deprecated]
 npm install --legacy-peer-deps
 npm start
 
@@ -17,7 +21,9 @@ Go to: http://localhost:3000/
 ## Release Frontend
 ```
 cd frontend
-npm run build
+yarn format
+yarn lint
+yarn build
 ```
 
 ----

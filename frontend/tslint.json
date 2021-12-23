@@ -5,7 +5,12 @@
     "tslint-config-prettier",
     "tslint-react-hooks"
   ],
+  "rulesDirectory": [
+    "tslint-plugin-prettier"
+  ],
   "rules": {
+    "prettier": true,
+    "interface-name": false,
     "ordered-imports": [false],
     "object-literal-sort-keys": [false],
     "no-console": [false],
@@ -13,7 +18,8 @@
     "react-hooks-nesting": "error",
     "only-arrow-functions": [false],
     "jsx-no-lambda": false,
-    "no-string-literal": false
+    "no-string-literal": false,
+    "no-var-requires": false
   },
   "linterOptions": {
     "exclude": [

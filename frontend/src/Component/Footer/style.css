@@ -2,6 +2,9 @@
   position: relative;
   text-align: center;
   padding: 15px;
-  color: white; }
-  .App-footer .nav-link {
-    display: inline; }
+  color: white;
+}
+
+.App-footer .nav-link {
+  display: inline;
+}

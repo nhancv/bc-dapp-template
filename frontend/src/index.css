@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Play&display=swap");
+
 body {
   margin: 0;
   padding: 0;
@@ -7,13 +8,21 @@ body {
   background: black;
   overflow: scroll;
   -ms-overflow-style: none;
-  scrollbar-width: none; }
-  body a {
-    color: #206A25; }
-  body a:hover {
-    color: #49994b; }
-  body input {
-    border-radius: 0 !important; }
+  scrollbar-width: none;
+}
+
+body a {
+  color: #206A25;
+}
+
+body a:hover {
+  color: #49994b;
+}
+
+body input {
+  border-radius: 0 !important;
+}
 
 body::-webkit-scrollbar {
-  display: none; }
+  display: none;
+}

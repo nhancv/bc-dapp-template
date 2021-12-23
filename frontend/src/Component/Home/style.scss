@@ -35,14 +35,15 @@
 
   .btn-primary {
     color: #fff;
-    background-color: #206A25;
-    border-color: #206A25;
+    background-color: #206a25;
+    border-color: #206a25;
   }
 
-  .btn-primary.disabled, .btn-primary:disabled {
+  .btn-primary.disabled,
+  .btn-primary:disabled {
     color: #fff;
-    background-color: #206A25;
-    border-color: #206A25;
+    background-color: #206a25;
+    border-color: #206a25;
   }
 
   .btn-primary:hover {
@@ -50,7 +51,6 @@
     background-color: #49994b;
     border-color: #49994b;
   }
-
 }
 
 .container::-webkit-scrollbar {

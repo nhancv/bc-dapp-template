@@ -1,7 +1,7 @@
-import * as React from 'react'
-import {Link} from 'react-router-dom';
-import './style.css'
-import logo from './logo.png';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import "./style.css";
+import logo from "./logo.png";
 
 type MainProps = {}
 type MainState = {}
@@ -15,15 +15,15 @@ class Main extends React.Component<MainProps, MainState> {
     return (
       <div>
         <header className="App-header">
-          <Link to={'/'} className="nav-link">
-            <img src={logo} className="App-logo" alt="logo"/>
+          <Link to={"/"} className="nav-link">
+            <img src={logo} className="App-logo" alt="logo" />
           </Link>
           <h1 className="App-title">Crypto Lottery</h1>
         </header>
-        <div style={{marginTop: '1rem', backgroundColor: '#393939', height: '1px'}}/>
+        <div style={{ marginTop: "1rem", backgroundColor: "#393939", height: "1px" }} />
       </div>
-    )
+    );
   }
 }
 
-export default Main
+export default Main;

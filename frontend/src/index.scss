@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Play&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Play&display=swap");
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Play', sans-serif;
+  font-family: "Play", sans-serif;
   color: white;
   background: black;
 
@@ -12,7 +12,7 @@ body {
   scrollbar-width: none; // Firefox
 
   a {
-    color: #206A25;
+    color: #206a25;
   }
 
   a:hover {
@@ -20,7 +20,7 @@ body {
   }
 
   input {
-    border-radius: 0 !important
+    border-radius: 0 !important;
   }
 }
 
