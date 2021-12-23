@@ -1,9 +1,9 @@
-import * as React from "react";
-import { Col, Container, Row } from "reactstrap";
-import "./style.css";
+import * as React from 'react';
+import { Col, Container, Row } from 'reactstrap';
+import './style.css';
 
-type MainProps = {}
-type MainState = {}
+type MainProps = {};
+type MainState = {};
 
 class Main extends React.Component<MainProps, MainState> {
   // Set default props

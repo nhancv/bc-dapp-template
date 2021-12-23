@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/solhint -f table src/active/*.sol src/active/**/*.sol -w 0",
-    "format": "./node_modules/.bin/prettier --write src/active/*.sol src/active/**/*.sol"
+    "lint": "./node_modules/.bin/solhint -f table 'src/active/**/*.sol' -w 0",
+    "format": "./node_modules/.bin/prettier --write 'src/active/**/*.sol'"
   },
   "keywords": [],
   "author": "",

@@ -1,13 +1,12 @@
-import * as React from "react";
-import { DApps, Footer, Header, HomeView, Rules, TermsOfService } from "./Component";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "./App.css";
+import * as React from 'react';
+import { DApps, Footer, Header, HomeView, Rules, TermsOfService } from './Component';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import './App.css';
 
-type AppProps = {}
-type AppState = {}
+type AppProps = {};
+type AppState = {};
 
 class App extends React.Component<AppProps, AppState> {
-
   constructor(props: AppProps) {
     super(props);
     this.state = {};
