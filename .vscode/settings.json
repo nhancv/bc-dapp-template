@@ -15,6 +15,19 @@
   "typescript.implementationsCodeLens.enabled": false,
   "prettier.semi": false,
   "prettier.singleQuote": true,
+  "editor.formatOnSave": false,
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true
+  },
+  "prettier.tslintIntegration": true,
+  "prettier.eslintIntegration": true,
+  "prettier.jsxSingleQuote": false,
   "solidity.enabledAsYouTypeCompilationErrorCheck": true,
   "solidity.validationDelay": 1500,
   "solidity.linter": "solhint",
